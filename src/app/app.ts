@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { TwoColumnBrowseComponent } from './two-column-browse/two-column-browse.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [TwoColumnBrowseComponent],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })

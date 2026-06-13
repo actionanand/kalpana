@@ -36,7 +36,7 @@
                     @if (section.links?.length) {
                       <p class="link-list">
                         @for (link of section.links; track link.label; let last = $last) {
-                          <a [href]="link.href">{{ link.label }}</a>
+                          <a [routerLink]="link.href">{{ link.label }}</a>
                           @if (!last) {
                             <span class="dot-separator" aria-hidden="true"></span>
                           }
@@ -82,7 +82,7 @@
         ></span>
       </button>
       @if (item.href) {
-        <a class="node-title node-title--link" [href]="item.href">{{ item.title }}</a>
+        <a class="node-title node-title--link" [routerLink]="item.href">{{ item.title }}</a>
       } @else {
         <span class="node-title">{{ item.title }}</span>
       }
@@ -97,7 +97,7 @@
         @if (item.links?.length) {
           <p class="link-list">
             @for (link of item.links; track link.label; let last = $last) {
-              <a [href]="link.href">{{ link.label }}</a>
+              <a [routerLink]="link.href">{{ link.label }}</a>
               @if (!last) {
                 <span class="dot-separator" aria-hidden="true"></span>
               }

@@ -78,11 +78,11 @@
 }
 
 .mfd-date-list {
-  padding: 18px 30px 30px;
+  padding: 14px 30px 24px;
 }
 
 .mfd-date-block {
-  margin-bottom: 28px;
+  margin-bottom: 20px;
 }
 
 .mfd-date-label {
@@ -96,13 +96,13 @@
 .mfd-date-controls {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 12px;
 }
 
 .mfd-date-op-btn,
 .mfd-date-field {
-  height: 50px;
+  height: 40px;
   border: 1px solid #c8ced4;
   border-radius: 3px;
   background: #fff;
@@ -123,29 +123,8 @@
 }
 
 .mfd-date-field {
-  width: 325px;
-  padding: 0 48px 0 14px;
-}
-
-.calendar-icon {
-  position: absolute;
-  top: 15px;
-  right: 16px;
-  width: 18px;
-  height: 18px;
-  border: 2px solid #5d6874;
-  border-radius: 2px;
-  pointer-events: none;
-}
-
-.calendar-icon::before {
-  position: absolute;
-  top: 4px;
-  left: -2px;
-  width: 18px;
-  height: 2px;
-  background: #5d6874;
-  content: '';
+  width: 240px;
+  padding: 0 12px;
 }
 
 .mfd-date-and {
@@ -219,7 +198,11 @@
   }
 
   .mfd-date-field {
-    width: min(325px, calc(100vw - 72px));
+    width: min(240px, calc(100vw - 72px));
+  }
+
+  .mfd-date-controls {
+    flex-wrap: wrap;
   }
 
   .mfd-footer {

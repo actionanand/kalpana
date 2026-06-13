@@ -1,12 +1,13 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Component, computed, input, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { BrowseColumn, BrowseNode, BrowseSection } from '../data/browse.models';
 
 type ExpandedState = Record<string, boolean>;
 
 @Component({
   selector: 'app-browse-panel',
-  imports: [NgTemplateOutlet],
+  imports: [NgTemplateOutlet, RouterLink],
   templateUrl: './browse-panel.component.html',
   styleUrl: './browse-panel.component.scss',
 })

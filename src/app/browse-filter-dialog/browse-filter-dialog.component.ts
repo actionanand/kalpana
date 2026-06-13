@@ -6,12 +6,9 @@ import {
   DestroyRef,
   ElementRef,
   inject,
-  injectAsync,
   input,
   linkedSignal,
-  onIdle,
   output,
-  resource,
   signal,
   viewChild,
 } from '@angular/core';
@@ -21,7 +18,7 @@ import {
   BrowseSelectionKey,
   FilterGroup,
 } from '../data/browse.models';
-import type { BrowseFilterService, FilterSortMode } from '../services/browse-filter.service';
+import { BrowseFilterService, FilterSortMode } from '../services/browse-filter.service';
 
 export interface FilterApplyEvent {
   readonly key: BrowseSelectionKey;
@@ -42,10 +39,7 @@ export class BrowseFilterDialogComponent {
 
   private readonly document = inject(DOCUMENT);
   private readonly destroyRef = inject(DestroyRef);
-  private readonly loadFilterService = injectAsync<BrowseFilterService>(
-    () => import('../services/browse-filter.service').then((module) => module.BrowseFilterService),
-    { prefetch: onIdle },
-  );
+  private readonly filterService = inject(BrowseFilterService);
 
   protected readonly searchInput = viewChild<ElementRef<HTMLInputElement>>('searchInput');
   protected readonly searchQuery = signal('');
@@ -69,34 +63,21 @@ export class BrowseFilterDialogComponent {
     computation: (source) => source.selectedIds,
   });
 
-  protected readonly groupsResource = resource({
-    params: () => ({
+  protected readonly groups = computed<readonly FilterGroup[]>(() =>
+    this.filterService.buildGroups({
       filter: this.filter(),
       searchQuery: this.searchQuery(),
       sortMode: this.sortMode(),
     }),
-    loader: async ({ params }) => {
-      const filterService = await this.loadFilterService();
-      return filterService.buildGroups(params);
-    },
-    defaultValue: [] as readonly FilterGroup[],
-  });
+  );
 
-  protected readonly selectionSummary = resource({
-    params: () => ({
-      filter: this.filter(),
-      selectedIds: this.draftSelectedIds(),
-    }),
-    loader: async ({ params }) => {
-      const filterService = await this.loadFilterService();
-      return filterService.selectionSummary(params.filter, params.selectedIds);
-    },
-    defaultValue: 'None selected',
-  });
+  protected readonly selectionSummary = computed(() =>
+    this.filterService.selectionSummary(this.filter(), this.draftSelectedIds()),
+  );
 
   protected readonly selectedCount = computed(() => this.draftSelectedIds().length);
   protected readonly allVisibleOptions = computed(() =>
-    this.groupsResource.value().flatMap((group) => group.options),
+    this.groups().flatMap((group) => group.options),
   );
 
   protected readonly allVisibleSelected = computed(() => {

@@ -37,7 +37,6 @@
                 [attr.aria-label]="draft.label + ' date'"
                 (change)="updateDate(draft.key, $event)"
               />
-              <span class="calendar-icon" aria-hidden="true"></span>
             </span>
 
             @if (draft.operator === 'between') {
@@ -50,7 +49,6 @@
                   [attr.aria-label]="draft.label + ' end date'"
                   (change)="updateDateTo(draft.key, $event)"
                 />
-                <span class="calendar-icon" aria-hidden="true"></span>
               </span>
             }
           </div>

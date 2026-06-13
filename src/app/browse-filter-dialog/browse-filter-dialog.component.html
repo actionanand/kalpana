@@ -92,12 +92,10 @@
     <div class="fd-divider"></div>
 
     <div class="fd-body">
-      @if (groupsResource.isLoading()) {
-        <p class="fd-status" role="status">Loading options...</p>
-      } @else if (groupsResource.value().length === 0) {
+      @if (groups().length === 0) {
         <p class="fd-status">No options match your search.</p>
       } @else {
-        @for (group of groupsResource.value(); track group.id) {
+        @for (group of groups(); track group.id) {
           <section class="fd-region-block">
             @if (filter().grouped && sortMode() === 'region') {
               <div class="fd-region-header">
@@ -153,7 +151,7 @@
     </div>
 
     <footer class="fd-footer">
-      <span class="fd-summary">{{ selectionSummary.value() }}</span>
+      <span class="fd-summary">{{ selectionSummary() }}</span>
       <div class="fd-footer-actions">
         @if (selectedCount() > 0) {
           <button type="button" class="fd-btn-cancel" (click)="clearSelection()">Clear</button>
