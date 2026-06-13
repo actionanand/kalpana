@@ -1,0 +1,34 @@
+<div class="browse-toolbar" aria-label="Browse controls">
+  <div class="browse-filter-group" aria-label="Filters">
+    <span class="filter-label">
+      <span class="filter-icon" aria-hidden="true"></span>
+      FILTERS
+    </span>
+
+    @for (filter of filters(); track filter.key) {
+      @let summary = activeSummary(filter);
+      <button
+        type="button"
+        class="filter-button"
+        [class.filter-button--active]="(summary?.count ?? 0) > 0"
+        (click)="filterSelected.emit(filter)"
+      >
+        {{ summary?.label ?? filter.label }}
+        @if (summary?.count) {
+          <span class="active-badge">{{ summary?.count }}</span>
+        }
+      </button>
+    }
+  </div>
+
+  <div class="browse-actions" aria-label="Panel controls">
+    <button type="button" class="action-button" (click)="expandAllSelected.emit()">
+      <span class="expand-icon" aria-hidden="true"></span>
+      Expand all
+    </button>
+    <button type="button" class="action-button" (click)="collapseAllSelected.emit()">
+      <span class="collapse-icon" aria-hidden="true"></span>
+      Collapse all
+    </button>
+  </div>
+</div>

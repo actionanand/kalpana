@@ -1,0 +1,26 @@
+<section class="browse-shell" aria-labelledby="browse-component-title">
+  <h1 id="browse-component-title" class="sr-only">Reusable browse component</h1>
+
+  <app-browse-toolbar
+    [filters]="filtersResource.value()"
+    [summaries]="filterSummaries()"
+    (filterSelected)="openFilter($event)"
+    (expandAllSelected)="expandAll()"
+    (collapseAllSelected)="collapseAll()"
+  />
+
+  @if (browseResource.isLoading()) {
+    <p class="browse-status" role="status">Loading browse data...</p>
+  }
+
+  <app-browse-panel [columns]="browseResource.value().columns" />
+
+  @if (activeFilter(); as filter) {
+    <app-browse-filter-dialog
+      [filter]="filter"
+      [selectedIds]="selectedIdsFor(filter)"
+      (applied)="applyFilter($event)"
+      (closed)="closeFilter()"
+    />
+  }
+</section>
