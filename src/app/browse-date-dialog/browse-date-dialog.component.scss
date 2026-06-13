@@ -1,0 +1,233 @@
+:host {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: block;
+}
+
+.dialog-backdrop {
+  display: grid;
+  min-height: 100%;
+  padding: 34px 18px;
+  place-items: center;
+  background: rgba(12, 19, 28, 0.28);
+}
+
+.mfd-container {
+  display: flex;
+  flex-direction: column;
+  width: min(876px, 100%);
+  max-height: 90vh;
+  border-radius: 4px;
+  background: #fff;
+  color: #1f2933;
+  box-shadow: 0 18px 48px rgba(15, 23, 42, 0.2);
+}
+
+.mfd-container--date-only {
+  width: min(876px, 100%);
+}
+
+.mfd-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 28px 14px;
+}
+
+.mfd-title {
+  margin: 0;
+  color: #0d1724;
+  font-size: 22px;
+  font-weight: 750;
+}
+
+.mfd-close-btn {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #44515f;
+  cursor: pointer;
+}
+
+.mfd-close-btn:hover,
+.mfd-close-btn:focus-visible {
+  background: #eef2f5;
+}
+
+.mfd-close-btn span::before,
+.mfd-close-btn span::after {
+  position: absolute;
+  top: 16px;
+  left: 8px;
+  width: 18px;
+  height: 2px;
+  background: currentColor;
+  content: '';
+}
+
+.mfd-close-btn span::before {
+  transform: rotate(45deg);
+}
+
+.mfd-close-btn span::after {
+  transform: rotate(-45deg);
+}
+
+.mfd-date-list {
+  padding: 18px 30px 30px;
+}
+
+.mfd-date-block {
+  margin-bottom: 28px;
+}
+
+.mfd-date-label {
+  display: block;
+  margin-bottom: 12px;
+  color: #0d1724;
+  font-size: 16px;
+  font-weight: 750;
+}
+
+.mfd-date-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.mfd-date-op-btn,
+.mfd-date-field {
+  height: 50px;
+  border: 1px solid #c8ced4;
+  border-radius: 3px;
+  background: #fff;
+  color: #202933;
+  font: inherit;
+  font-size: 16px;
+}
+
+.mfd-date-op-btn {
+  width: 112px;
+  padding: 0 12px;
+  cursor: pointer;
+}
+
+.date-field-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.mfd-date-field {
+  width: 325px;
+  padding: 0 48px 0 14px;
+}
+
+.calendar-icon {
+  position: absolute;
+  top: 15px;
+  right: 16px;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #5d6874;
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.calendar-icon::before {
+  position: absolute;
+  top: 4px;
+  left: -2px;
+  width: 18px;
+  height: 2px;
+  background: #5d6874;
+  content: '';
+}
+
+.mfd-date-and {
+  color: #202933;
+  font-size: 16px;
+}
+
+.mfd-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 28px;
+  border-top: 1px solid #dfe3e6;
+}
+
+.mfd-summary {
+  color: #202933;
+  font-size: 16px;
+}
+
+.mfd-footer-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.mfd-btn-cancel,
+.mfd-btn-apply {
+  min-height: 42px;
+  border: 0;
+  border-radius: 4px;
+  font: inherit;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.mfd-btn-cancel {
+  padding: 8px 20px;
+  background: transparent;
+  color: #0d1724;
+}
+
+.mfd-btn-cancel:hover,
+.mfd-btn-cancel:focus-visible {
+  background: #eef2f5;
+}
+
+.mfd-btn-apply {
+  padding: 8px 34px;
+  background: #17172f;
+  color: #fff;
+}
+
+.mfd-btn-apply:hover,
+.mfd-btn-apply:focus-visible {
+  background: #2d2d50;
+}
+
+.mfd-close-btn:focus-visible,
+.mfd-date-op-btn:focus-visible,
+.mfd-date-field:focus-visible,
+.mfd-btn-cancel:focus-visible,
+.mfd-btn-apply:focus-visible {
+  outline: 2px solid #4b5560;
+  outline-offset: 3px;
+}
+
+@media (max-width: 720px) {
+  .dialog-backdrop {
+    padding: 12px;
+  }
+
+  .mfd-date-field {
+    width: min(325px, calc(100vw - 72px));
+  }
+
+  .mfd-footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .mfd-footer-actions {
+    justify-content: flex-end;
+  }
+}

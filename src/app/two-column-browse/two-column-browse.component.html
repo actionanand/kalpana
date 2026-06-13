@@ -4,7 +4,10 @@
   <app-browse-toolbar
     [filters]="filtersResource.value()"
     [summaries]="filterSummaries()"
+    [loadingKey]="loadingKey()"
     (filterSelected)="openFilter($event)"
+    (dateSelected)="openDateFilter()"
+    (moreSelected)="openMoreFilters()"
     (expandAllSelected)="expandAll()"
     (collapseAllSelected)="collapseAll()"
   />
@@ -21,6 +24,24 @@
       [selectedIds]="selectedIdsFor(filter)"
       (applied)="applyFilter($event)"
       (closed)="closeFilter()"
+    />
+  }
+
+  @if (activeDateEntries(); as entries) {
+    <app-browse-date-dialog
+      [entries]="entries"
+      [selectedDates]="selectedDates()"
+      (applied)="applyDateFilter($event)"
+      (closed)="closeDateFilter()"
+    />
+  }
+
+  @if (activeMoreFilters(); as moreFilters) {
+    <app-browse-more-filters-dialog
+      [filters]="moreFilters"
+      [selectedFilters]="selectedFilters()"
+      (applied)="applyMoreFilters($event)"
+      (closed)="closeMoreFilters()"
     />
   }
 </section>

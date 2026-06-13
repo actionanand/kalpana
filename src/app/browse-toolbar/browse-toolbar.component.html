@@ -10,15 +10,62 @@
       <button
         type="button"
         class="filter-button"
+        [class.filter-button--loading]="isLoading(filter.key)"
         [class.filter-button--active]="(summary?.count ?? 0) > 0"
+        [disabled]="isLoading(filter.key)"
         (click)="filterSelected.emit(filter)"
       >
-        {{ summary?.label ?? filter.label }}
-        @if (summary?.count) {
+        @if (isLoading(filter.key)) {
+          <span class="loading-dot" aria-hidden="true"></span>
+          Loading {{ filter.label }}
+        } @else {
+          {{ summary?.label ?? filter.label }}
+        }
+        @if (!isLoading(filter.key) && summary?.count) {
           <span class="active-badge">{{ summary?.count }}</span>
         }
       </button>
     }
+
+    @let dateSummary = summaryFor('date');
+    <button
+      type="button"
+      class="filter-button"
+      [class.filter-button--loading]="isLoading('date')"
+      [class.filter-button--active]="(dateSummary?.count ?? 0) > 0"
+      [disabled]="isLoading('date')"
+      (click)="dateSelected.emit()"
+    >
+      @if (isLoading('date')) {
+        <span class="loading-dot" aria-hidden="true"></span>
+        Loading Date
+      } @else {
+        Date
+      }
+      @if (!isLoading('date') && dateSummary?.count) {
+        <span class="active-badge">{{ dateSummary?.count }}</span>
+      }
+    </button>
+
+    @let moreSummary = summaryFor('more');
+    <button
+      type="button"
+      class="filter-button"
+      [class.filter-button--loading]="isLoading('more')"
+      [class.filter-button--active]="(moreSummary?.count ?? 0) > 0"
+      [disabled]="isLoading('more')"
+      (click)="moreSelected.emit()"
+    >
+      @if (isLoading('more')) {
+        <span class="loading-dot" aria-hidden="true"></span>
+        Loading More
+      } @else {
+        More
+      }
+      @if (!isLoading('more') && moreSummary?.count) {
+        <span class="active-badge">{{ moreSummary?.count }}</span>
+      }
+    </button>
   </div>
 
   <div class="browse-actions" aria-label="Panel controls">

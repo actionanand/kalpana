@@ -17,14 +17,14 @@ import {
 } from '@angular/core';
 import {
   BrowseFilter,
-  BrowseFilterKey,
   BrowseFilterOption,
+  BrowseSelectionKey,
   FilterGroup,
 } from '../data/browse.models';
 import type { BrowseFilterService, FilterSortMode } from '../services/browse-filter.service';
 
 export interface FilterApplyEvent {
-  readonly key: BrowseFilterKey;
+  readonly key: BrowseSelectionKey;
   readonly selectedIds: readonly string[];
 }
 
@@ -49,7 +49,11 @@ export class BrowseFilterDialogComponent {
 
   protected readonly searchInput = viewChild<ElementRef<HTMLInputElement>>('searchInput');
   protected readonly searchQuery = signal('');
-  protected readonly sortMode = signal<FilterSortMode>('region');
+  protected readonly sortMode = linkedSignal<BrowseFilter, FilterSortMode>({
+    source: this.filter,
+    computation: (filter) => (filter.grouped ? 'region' : 'frequency'),
+  });
+  protected readonly sortMenuOpen = signal(false);
   protected readonly expandedGroups = signal<Record<string, boolean>>({});
 
   private readonly selectionSource = computed(() => ({
@@ -58,7 +62,7 @@ export class BrowseFilterDialogComponent {
   }));
 
   protected readonly draftSelectedIds = linkedSignal<
-    { key: BrowseFilterKey; selectedIds: readonly string[] },
+    { key: BrowseSelectionKey; selectedIds: readonly string[] },
     readonly string[]
   >({
     source: this.selectionSource,
@@ -133,6 +137,23 @@ export class BrowseFilterDialogComponent {
 
   protected setSortMode(mode: FilterSortMode): void {
     this.sortMode.set(mode);
+    this.sortMenuOpen.set(false);
+  }
+
+  protected toggleSortMenu(): void {
+    this.sortMenuOpen.update((open) => !open);
+  }
+
+  protected sortLabel(): string {
+    if (this.sortMode() === 'region') {
+      return 'Group by region';
+    }
+
+    if (this.sortMode() === 'alpha') {
+      return 'Sort alphabetically';
+    }
+
+    return 'Sort by frequency';
   }
 
   protected isSelected(option: BrowseFilterOption): boolean {

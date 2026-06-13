@@ -63,6 +63,12 @@
   background: #e9ecef;
 }
 
+.filter-button--loading,
+.filter-button:disabled {
+  color: #5d6874;
+  cursor: wait;
+}
+
 .filter-button:focus-visible,
 .action-button:focus-visible {
   outline: 2px solid #075fb8;
@@ -81,6 +87,21 @@
   color: #fff;
   font-size: 11px;
   font-weight: 700;
+}
+
+.loading-dot {
+  width: 14px;
+  height: 14px;
+  border: 2px solid #aeb7bf;
+  border-top-color: #27384a;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .filter-icon,

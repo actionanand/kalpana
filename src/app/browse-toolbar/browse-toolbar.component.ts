@@ -1,8 +1,8 @@
 import { Component, input, output } from '@angular/core';
-import { BrowseFilter, BrowseFilterKey } from '../data/browse.models';
+import { BrowseFilter, BrowseSelectionKey } from '../data/browse.models';
 
 export interface FilterSummary {
-  readonly key: BrowseFilterKey;
+  readonly key: BrowseSelectionKey | 'date' | 'more';
   readonly count: number;
   readonly label: string;
 }
@@ -15,12 +15,23 @@ export interface FilterSummary {
 export class BrowseToolbarComponent {
   readonly filters = input<readonly BrowseFilter[]>([]);
   readonly summaries = input<readonly FilterSummary[]>([]);
+  readonly loadingKey = input<BrowseSelectionKey | 'date' | 'more' | null>(null);
 
   readonly filterSelected = output<BrowseFilter>();
+  readonly dateSelected = output<void>();
+  readonly moreSelected = output<void>();
   readonly expandAllSelected = output<void>();
   readonly collapseAllSelected = output<void>();
 
   protected activeSummary(filter: BrowseFilter): FilterSummary | undefined {
     return this.summaries().find((summary) => summary.key === filter.key);
+  }
+
+  protected summaryFor(key: 'date' | 'more'): FilterSummary | undefined {
+    return this.summaries().find((summary) => summary.key === key);
+  }
+
+  protected isLoading(key: BrowseSelectionKey | 'date' | 'more'): boolean {
+    return this.loadingKey() === key;
   }
 }

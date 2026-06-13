@@ -1,17 +1,30 @@
-export type BrowseFilterKey = 'territory' | 'knowledgeArea';
+export type BrowseFilterKey = 'territory' | 'documentType' | 'topic' | 'knowledgeArea';
+export type MoreFilterKey =
+  | 'format'
+  | 'audience'
+  | 'sourceType'
+  | 'status'
+  | 'language'
+  | 'ownerTeam';
+export type BrowseSelectionKey = BrowseFilterKey | MoreFilterKey;
+export type BrowseDateKey = 'publishedOn' | 'updatedOn' | 'reviewedOn' | 'effectiveOn';
+export type DateOperator = 'after' | 'before' | 'between';
+export type SelectedFilterMap = Partial<Record<BrowseSelectionKey, readonly string[]>>;
 
 export interface BrowseLink {
   readonly label: string;
   readonly href: string;
   readonly territoryId: string;
+  readonly filterIds: SelectedFilterMap;
+  readonly date: string;
 }
 
 export interface BrowseNode {
   readonly id: string;
   readonly title: string;
   readonly expanded?: boolean;
-  readonly territoryIds?: readonly string[];
-  readonly areaIds?: readonly string[];
+  readonly filterIds?: SelectedFilterMap;
+  readonly date?: string;
   readonly links?: readonly BrowseLink[];
   readonly children?: readonly BrowseNode[];
 }
@@ -30,8 +43,8 @@ export interface BrowseResponse {
 }
 
 export interface BrowseQuery {
-  readonly territoryIds: readonly string[];
-  readonly areaIds: readonly string[];
+  readonly selectedFilters: SelectedFilterMap;
+  readonly dateFilters: readonly BrowseDateSelection[];
 }
 
 export interface BrowseFilterOption {
@@ -42,11 +55,28 @@ export interface BrowseFilterOption {
 }
 
 export interface BrowseFilter {
-  readonly key: BrowseFilterKey;
+  readonly key: BrowseSelectionKey;
   readonly label: string;
   readonly searchable: boolean;
   readonly grouped: boolean;
   readonly options: readonly BrowseFilterOption[];
+}
+
+export interface BrowseFilterDefinition extends BrowseFilter {
+  readonly placement: 'toolbar' | 'more';
+}
+
+export interface BrowseDateEntry {
+  readonly key: BrowseDateKey;
+  readonly label: string;
+  readonly defaultOperator: DateOperator;
+}
+
+export interface BrowseDateSelection {
+  readonly key: BrowseDateKey;
+  readonly operator: DateOperator;
+  readonly date: string;
+  readonly dateTo?: string;
 }
 
 export interface FilterGroup {

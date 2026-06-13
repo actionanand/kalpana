@@ -1,12 +1,23 @@
 import { Service } from '@angular/core';
-import { BROWSE_COLUMNS, BROWSE_FILTERS, EMPTY_BROWSE_RESPONSE } from '../data/browse-data';
+import {
+  BROWSE_COLUMNS,
+  BROWSE_DATE_ENTRIES,
+  BROWSE_FILTERS,
+  EMPTY_BROWSE_RESPONSE,
+} from '../data/browse-data';
 import {
   BrowseColumn,
+  BrowseDateEntry,
+  BrowseDateSelection,
   BrowseFilter,
+  BrowseFilterDefinition,
+  BrowseLink,
   BrowseNode,
   BrowseQuery,
   BrowseResponse,
   BrowseSection,
+  BrowseSelectionKey,
+  SelectedFilterMap,
 } from '../data/browse.models';
 
 @Service()
@@ -24,14 +35,32 @@ export class BrowseDataService {
     };
   }
 
-  async loadFilters(abortSignal: AbortSignal): Promise<readonly BrowseFilter[]> {
+  async loadToolbarFilters(abortSignal: AbortSignal): Promise<readonly BrowseFilter[]> {
     await this.simulateLatency(abortSignal, 120);
-    return BROWSE_FILTERS;
+    return BROWSE_FILTERS.filter((filter) => filter.placement === 'toolbar');
+  }
+
+  async loadMoreFilters(abortSignal: AbortSignal): Promise<readonly BrowseFilter[]> {
+    await this.simulateLatency(abortSignal, 180);
+    return BROWSE_FILTERS.filter((filter) => filter.placement === 'more');
+  }
+
+  async loadDateEntries(abortSignal: AbortSignal): Promise<readonly BrowseDateEntry[]> {
+    await this.simulateLatency(abortSignal, 120);
+    return BROWSE_DATE_ENTRIES;
+  }
+
+  async loadFilter(
+    key: BrowseSelectionKey,
+    abortSignal: AbortSignal,
+  ): Promise<BrowseFilterDefinition | undefined> {
+    await this.simulateLatency(abortSignal, 420);
+    return BROWSE_FILTERS.find((filter) => filter.key === key);
   }
 
   private filterColumn(column: BrowseColumn, query: BrowseQuery): BrowseColumn | null {
     const sections = column.sections
-      .map((section) => this.filterNode(section, query, false))
+      .map((section) => this.filterNode(section, query, {}))
       .filter((section): section is BrowseSection => section !== null);
 
     return sections.length > 0 ? { ...column, sections } : null;
@@ -40,33 +69,15 @@ export class BrowseDataService {
   private filterNode(
     node: BrowseNode,
     query: BrowseQuery,
-    inheritedAreaMatch: boolean,
+    inheritedFilters: SelectedFilterMap,
   ): BrowseNode | null {
-    const areaMatch =
-      inheritedAreaMatch ||
-      query.areaIds.length === 0 ||
-      this.hasOverlap(node.areaIds, query.areaIds);
-
-    const links = (node.links ?? []).filter(
-      (link) => query.territoryIds.length === 0 || query.territoryIds.includes(link.territoryId),
-    );
-
+    const nodeFilters = this.mergeFilters(inheritedFilters, node.filterIds);
+    const links = (node.links ?? []).filter((link) => this.matchesLink(link, query, nodeFilters));
     const children = (node.children ?? [])
-      .map((child) => this.filterNode(child, query, areaMatch))
+      .map((child) => this.filterNode(child, query, nodeFilters))
       .filter((child): child is BrowseNode => child !== null);
 
-    const territoryMatch =
-      query.territoryIds.length === 0 ||
-      this.hasOverlap(node.territoryIds, query.territoryIds) ||
-      links.length > 0 ||
-      children.length > 0;
-
-    const isLeaf = !node.links?.length && !node.children?.length;
-    if ((!areaMatch && children.length === 0) || !territoryMatch) {
-      return null;
-    }
-
-    if (!isLeaf && links.length === 0 && children.length === 0) {
+    if (links.length === 0 && children.length === 0) {
       return null;
     }
 
@@ -77,8 +88,72 @@ export class BrowseDataService {
     };
   }
 
-  private hasOverlap(source: readonly string[] | undefined, selected: readonly string[]): boolean {
-    return !!source?.some((id) => selected.includes(id));
+  private matchesLink(
+    link: BrowseLink,
+    query: BrowseQuery,
+    inheritedFilters: SelectedFilterMap,
+  ): boolean {
+    const linkFilters = this.mergeFilters(inheritedFilters, {
+      ...link.filterIds,
+      territory: [link.territoryId],
+    });
+
+    return (
+      this.matchesSelectedFilters(linkFilters, query.selectedFilters) &&
+      this.matchesDateFilters(link.date, query.dateFilters)
+    );
+  }
+
+  private matchesSelectedFilters(
+    candidateFilters: SelectedFilterMap,
+    selectedFilters: SelectedFilterMap,
+  ): boolean {
+    return Object.entries(selectedFilters).every(([key, selectedIds]) => {
+      if (!selectedIds || selectedIds.length === 0) {
+        return true;
+      }
+
+      const candidateIds = candidateFilters[key as BrowseSelectionKey] ?? [];
+      return selectedIds.some((id) => candidateIds.includes(id));
+    });
+  }
+
+  private matchesDateFilters(
+    dateValue: string,
+    dateFilters: readonly BrowseDateSelection[],
+  ): boolean {
+    if (dateFilters.length === 0) {
+      return true;
+    }
+
+    const candidateTime = new Date(dateValue).getTime();
+    return dateFilters.every((filter) => {
+      const fromTime = new Date(filter.date).getTime();
+      const toTime = filter.dateTo ? new Date(filter.dateTo).getTime() : fromTime;
+
+      if (filter.operator === 'before') {
+        return candidateTime <= fromTime;
+      }
+
+      if (filter.operator === 'between') {
+        return candidateTime >= fromTime && candidateTime <= toTime;
+      }
+
+      return candidateTime >= fromTime;
+    });
+  }
+
+  private mergeFilters(
+    first: SelectedFilterMap,
+    second: SelectedFilterMap | undefined,
+  ): SelectedFilterMap {
+    const merged: Record<string, readonly string[]> = { ...first };
+
+    Object.entries(second ?? {}).forEach(([key, values]) => {
+      merged[key] = [...new Set([...(merged[key] ?? []), ...(values ?? [])])];
+    });
+
+    return merged as SelectedFilterMap;
   }
 
   private simulateLatency(abortSignal: AbortSignal, delay = 220): Promise<void> {

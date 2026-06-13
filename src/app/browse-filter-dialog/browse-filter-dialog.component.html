@@ -39,33 +39,54 @@
         <span>Select all</span>
       </label>
 
-      <div class="fd-sort-group" aria-label="Sort options">
-        @if (filter().grouped) {
-          <button
-            type="button"
-            class="fd-sort-btn"
-            [class.fd-sort-btn--active]="sortMode() === 'region'"
-            (click)="setSortMode('region')"
-          >
-            Group by region
-          </button>
+      <div class="fd-sort-wrapper">
+        <button
+          type="button"
+          class="fd-sort-menu-btn"
+          [attr.aria-expanded]="sortMenuOpen()"
+          aria-haspopup="menu"
+          (click)="toggleSortMenu()"
+        >
+          {{ sortLabel() }}
+          <span class="fd-sort-arrow" aria-hidden="true"></span>
+        </button>
+
+        @if (sortMenuOpen()) {
+          <div class="fd-sort-menu" role="menu">
+            @if (filter().grouped) {
+              <button
+                type="button"
+                role="menuitemradio"
+                class="fd-sort-menu-item"
+                [class.fd-sort-menu-item--active]="sortMode() === 'region'"
+                [attr.aria-checked]="sortMode() === 'region'"
+                (click)="setSortMode('region')"
+              >
+                Group by region
+              </button>
+            }
+            <button
+              type="button"
+              role="menuitemradio"
+              class="fd-sort-menu-item"
+              [class.fd-sort-menu-item--active]="sortMode() === 'alpha'"
+              [attr.aria-checked]="sortMode() === 'alpha'"
+              (click)="setSortMode('alpha')"
+            >
+              Sort alphabetically
+            </button>
+            <button
+              type="button"
+              role="menuitemradio"
+              class="fd-sort-menu-item"
+              [class.fd-sort-menu-item--active]="sortMode() === 'frequency'"
+              [attr.aria-checked]="sortMode() === 'frequency'"
+              (click)="setSortMode('frequency')"
+            >
+              Sort by frequency
+            </button>
+          </div>
         }
-        <button
-          type="button"
-          class="fd-sort-btn"
-          [class.fd-sort-btn--active]="sortMode() === 'alpha'"
-          (click)="setSortMode('alpha')"
-        >
-          A-Z
-        </button>
-        <button
-          type="button"
-          class="fd-sort-btn"
-          [class.fd-sort-btn--active]="sortMode() === 'frequency'"
-          (click)="setSortMode('frequency')"
-        >
-          Frequency
-        </button>
       </div>
     </div>
 
