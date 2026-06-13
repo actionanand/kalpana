@@ -161,9 +161,11 @@ export class BrowseFilterDialogComponent {
   }
 
   protected toggleOption(option: BrowseFilterOption): void {
-    this.loadFilterService().then((filterService) => {
-      this.draftSelectedIds.set(filterService.toggleSelection(this.draftSelectedIds(), option.id));
-    });
+    this.draftSelectedIds.update((selectedIds) =>
+      selectedIds.includes(option.id)
+        ? selectedIds.filter((id) => id !== option.id)
+        : [...selectedIds, option.id],
+    );
   }
 
   protected toggleSelectAll(event: Event): void {
@@ -182,11 +184,12 @@ export class BrowseFilterDialogComponent {
     const checkbox = event.target as HTMLInputElement | null;
     const checked = !!checkbox?.checked;
 
-    this.loadFilterService().then((filterService) => {
-      this.draftSelectedIds.set(
-        filterService.toggleGroupSelection(this.draftSelectedIds(), group, checked),
-      );
-    });
+    const groupIds = new Set(group.options.map((option) => option.id));
+    this.draftSelectedIds.update((selectedIds) =>
+      checked
+        ? [...new Set([...selectedIds, ...groupIds])]
+        : selectedIds.filter((id) => !groupIds.has(id)),
+    );
   }
 
   protected isGroupSelected(group: FilterGroup): boolean {

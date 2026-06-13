@@ -24,12 +24,16 @@ export class BrowsePanelComponent {
     this.setAllExpanded(false);
   }
 
+  resetExpansion(): void {
+    this.expandedState.set({});
+  }
+
   protected isSectionExpanded(section: BrowseSection): boolean {
     return this.expandedState()[section.id] ?? section.expanded ?? true;
   }
 
   protected isItemExpanded(item: BrowseNode): boolean {
-    return this.expandedState()[item.id] ?? item.expanded ?? false;
+    return this.expandedState()[item.id] ?? false;
   }
 
   protected toggleSection(section: BrowseSection): void {
@@ -45,7 +49,7 @@ export class BrowsePanelComponent {
   }
 
   protected hasItemContent(item: BrowseNode): boolean {
-    return this.hasItems(item.children) || this.hasItems(item.links);
+    return this.hasItems(item.children) || this.hasItems(item.links) || !!item.abstract;
   }
 
   private toggleById(id: string, currentlyExpanded: boolean): void {

@@ -1,6 +1,29 @@
 <section class="browse-shell" aria-labelledby="browse-component-title">
   <h1 id="browse-component-title" class="sr-only">Reusable browse component</h1>
 
+  @if (activeMode(); as mode) {
+    <header class="browse-title-row">
+      <div>
+        <h2>{{ mode.title }}</h2>
+        <p>{{ mode.subtitle }}</p>
+      </div>
+
+      <nav class="browse-tabs" aria-label="Browse sections">
+        @for (browseMode of modesResource.value(); track browseMode.id) {
+          <button
+            type="button"
+            class="browse-tab"
+            [class.browse-tab--active]="browseMode.id === activeModeId()"
+            [attr.aria-current]="browseMode.id === activeModeId() ? 'page' : null"
+            (click)="setMode(browseMode.id)"
+          >
+            {{ browseMode.label }}
+          </button>
+        }
+      </nav>
+    </header>
+  }
+
   <app-browse-toolbar
     [filters]="filtersResource.value()"
     [summaries]="filterSummaries()"

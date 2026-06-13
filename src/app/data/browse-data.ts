@@ -1,4 +1,26 @@
-import { BrowseColumn, BrowseDateEntry, BrowseFilterDefinition } from './browse.models';
+import { BrowseColumn, BrowseDateEntry, BrowseFilterDefinition, BrowseMode } from './browse.models';
+
+export const BROWSE_MODES: readonly BrowseMode[] = [
+  {
+    id: 'signal-briefs',
+    label: 'Signal briefs',
+    title: 'Signal briefs',
+    subtitle: 'Fresh civic planning signals organized by theme, place, and evidence type.',
+  },
+  {
+    id: 'place-summaries',
+    label: 'Place summaries',
+    title: 'Place summaries',
+    subtitle: 'Reusable local practice summaries with examples and short explanatory passages.',
+  },
+  {
+    id: 'benchmark-matrices',
+    label: 'Benchmark matrices',
+    title: 'Benchmark matrices',
+    subtitle:
+      'Structured comparisons for city systems, resilience actions, and delivery timelines.',
+  },
+];
 
 export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
   {
@@ -163,6 +185,26 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
             ],
           },
           {
+            id: 'shared-equity-model-summary',
+            title: 'Shared equity model summary',
+            href: '#',
+            abstract:
+              'This summary compares shared equity housing models, eligibility windows, resale formulas, and stewardship practices used by city housing teams.',
+            date: '2026-03-19',
+            filterIds: {
+              territory: ['canada', 'netherlands'],
+              documentType: ['brief'],
+              topic: ['housing-access'],
+              knowledgeArea: ['housing'],
+              format: ['briefing'],
+              audience: ['planners'],
+              sourceType: ['regional-consortium'],
+              status: ['active'],
+              language: ['english'],
+              ownerTeam: ['housing-desk'],
+            },
+          },
+          {
             id: 'adaptive-reuse-library',
             title: 'Adaptive reuse library',
             expanded: true,
@@ -295,6 +337,77 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
                 },
               },
             ],
+          },
+        ],
+      },
+      {
+        id: 'community-funding-watch',
+        title: 'Community Funding Watch',
+        expanded: true,
+        filterIds: {
+          knowledgeArea: ['public-realm'],
+          topic: ['public-space'],
+        },
+        children: [
+          {
+            id: 'participatory-budgeting-tracker',
+            title: 'Participatory budgeting tracker',
+            links: [
+              {
+                label: 'Brazil',
+                href: '#',
+                territoryId: 'brazil',
+                date: '2026-02-28',
+                filterIds: {
+                  documentType: ['tracker'],
+                  topic: ['public-space'],
+                  knowledgeArea: ['public-realm'],
+                  format: ['dashboard'],
+                  audience: ['planners'],
+                  sourceType: ['city-office'],
+                  status: ['active'],
+                  language: ['portuguese'],
+                  ownerTeam: ['public-life'],
+                },
+              },
+              {
+                label: 'Canada',
+                href: '#',
+                territoryId: 'canada',
+                date: '2025-10-06',
+                filterIds: {
+                  documentType: ['case-study'],
+                  topic: ['public-space'],
+                  knowledgeArea: ['public-realm'],
+                  format: ['report'],
+                  audience: ['researchers'],
+                  sourceType: ['regional-consortium'],
+                  status: ['review'],
+                  language: ['english', 'french'],
+                  ownerTeam: ['public-life'],
+                },
+              },
+            ],
+          },
+          {
+            id: 'grant-readiness-brief',
+            title: 'Grant readiness brief',
+            href: '#',
+            abstract:
+              'A short passage outlining how teams sequence community grants, local match requirements, and public reporting checkpoints across annual funding cycles.',
+            date: '2025-12-18',
+            filterIds: {
+              territory: ['international'],
+              documentType: ['brief'],
+              topic: ['public-space'],
+              knowledgeArea: ['public-realm'],
+              format: ['briefing'],
+              audience: ['operators'],
+              sourceType: ['research-network'],
+              status: ['active'],
+              language: ['english'],
+              ownerTeam: ['urban-insights'],
+            },
           },
         ],
       },
@@ -448,6 +561,26 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
             ],
           },
           {
+            id: 'heat-threshold-note',
+            title: 'Heat threshold note',
+            href: '#',
+            abstract:
+              'This note explains how heat response thresholds are selected, reviewed, and communicated before seasonal operations begin.',
+            date: '2026-04-27',
+            filterIds: {
+              territory: ['india', 'kenya', 'singapore'],
+              documentType: ['brief'],
+              topic: ['heat-risk'],
+              knowledgeArea: ['heat'],
+              format: ['briefing'],
+              audience: ['operators'],
+              sourceType: ['regional-consortium'],
+              status: ['active'],
+              language: ['english'],
+              ownerTeam: ['resilience-lab'],
+            },
+          },
+          {
             id: 'shade-equity-scorecard',
             title: 'Shade equity scorecard',
             expanded: true,
@@ -548,6 +681,51 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
               status: ['archived'],
               language: ['english'],
               ownerTeam: ['mobility-lab'],
+            },
+          },
+        ],
+      },
+      {
+        id: 'energy-transition-portfolio',
+        title: 'Energy Transition Portfolio',
+        expanded: true,
+        filterIds: {
+          knowledgeArea: ['heat'],
+          topic: ['heat-risk'],
+        },
+        links: [
+          {
+            label: 'International',
+            href: '#',
+            territoryId: 'international',
+            date: '2026-03-12',
+            filterIds: {
+              documentType: ['directory'],
+              topic: ['heat-risk'],
+              knowledgeArea: ['heat'],
+              format: ['library'],
+              audience: ['researchers'],
+              sourceType: ['research-network'],
+              status: ['active'],
+              language: ['english'],
+              ownerTeam: ['resilience-lab'],
+            },
+          },
+          {
+            label: 'Estonia',
+            href: '#',
+            territoryId: 'estonia',
+            date: '2025-09-02',
+            filterIds: {
+              documentType: ['scorecard'],
+              topic: ['digital-access'],
+              knowledgeArea: ['digital-services'],
+              format: ['dashboard'],
+              audience: ['analysts'],
+              sourceType: ['national-office'],
+              status: ['review'],
+              language: ['english'],
+              ownerTeam: ['service-design'],
             },
           },
         ],

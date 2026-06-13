@@ -12,6 +12,7 @@ import {
   BrowseDateEntry,
   BrowseDateSelection,
   BrowseFilter,
+  BrowseMode,
   BrowseSelectionKey,
   SelectedFilterMap,
 } from '../data/browse.models';
@@ -35,6 +36,7 @@ export class TwoColumnBrowseComponent {
 
   protected readonly selectedFilters = signal<SelectedFilterMap>({});
   protected readonly selectedDates = signal<readonly BrowseDateSelection[]>([]);
+  protected readonly activeModeId = signal('signal-briefs');
   protected readonly activeFilter = signal<BrowseFilter | null>(null);
   protected readonly activeDateEntries = signal<readonly BrowseDateEntry[] | null>(null);
   protected readonly activeMoreFilters = signal<readonly BrowseFilter[] | null>(null);
@@ -42,6 +44,7 @@ export class TwoColumnBrowseComponent {
 
   protected readonly browseResource = resource({
     params: () => ({
+      modeId: this.activeModeId(),
       selectedFilters: this.selectedFilters(),
       dateFilters: this.selectedDates(),
     }),
@@ -53,6 +56,17 @@ export class TwoColumnBrowseComponent {
     loader: ({ abortSignal }) => this.browseDataService.loadToolbarFilters(abortSignal),
     defaultValue: [] as readonly BrowseFilter[],
   });
+
+  protected readonly modesResource = resource({
+    loader: ({ abortSignal }) => this.browseDataService.loadBrowseModes(abortSignal),
+    defaultValue: [] as readonly BrowseMode[],
+  });
+
+  protected readonly activeMode = computed(
+    () =>
+      this.modesResource.value().find((mode) => mode.id === this.activeModeId()) ??
+      this.modesResource.value()[0],
+  );
 
   protected readonly filterSummaries = computed<readonly FilterSummary[]>(() => [
     ...this.filtersResource.value().map((filter) => {
@@ -84,6 +98,11 @@ export class TwoColumnBrowseComponent {
     );
     this.activeFilter.set(loadedFilter ?? filter);
     this.loadingKey.set(null);
+  }
+
+  protected setMode(modeId: string): void {
+    this.activeModeId.set(modeId);
+    this.browsePanel()?.resetExpansion();
   }
 
   protected async openDateFilter(): Promise<void> {

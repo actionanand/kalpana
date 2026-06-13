@@ -160,8 +160,21 @@ a:hover {
   overflow-wrap: anywhere;
 }
 
+.node-title--link {
+  color: #075fb8;
+  font-weight: 700;
+}
+
 .node-content {
   margin: -6px 0 22px 46px;
+}
+
+.node-abstract {
+  max-width: 92%;
+  margin: 0 0 22px;
+  color: #34404b;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 .empty-state {

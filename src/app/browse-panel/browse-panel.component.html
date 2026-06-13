@@ -81,11 +81,19 @@
           aria-hidden="true"
         ></span>
       </button>
-      <a class="node-title" href="#">{{ item.title }}</a>
+      @if (item.href) {
+        <a class="node-title node-title--link" [href]="item.href">{{ item.title }}</a>
+      } @else {
+        <span class="node-title">{{ item.title }}</span>
+      }
     </div>
 
     @if (isItemExpanded(item)) {
       <div class="node-content">
+        @if (item.abstract) {
+          <p class="node-abstract">{{ item.abstract }}</p>
+        }
+
         @if (item.links?.length) {
           <p class="link-list">
             @for (link of item.links; track link.label; let last = $last) {

@@ -114,25 +114,8 @@
   color: currentColor;
 }
 
-.filter-icon::before,
-.filter-icon::after {
-  position: absolute;
-  left: 3px;
-  width: 12px;
-  height: 2px;
-  border-radius: 1px;
-  background: currentColor;
-  content: '';
-}
-
-.filter-icon::before {
-  top: 5px;
-  box-shadow: 3px 5px 0 currentColor;
-}
-
-.filter-icon::after {
-  top: 15px;
-  width: 6px;
+.filter-icon {
+  fill: currentColor;
 }
 
 .expand-icon::before,

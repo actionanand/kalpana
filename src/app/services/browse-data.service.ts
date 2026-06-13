@@ -3,6 +3,7 @@ import {
   BROWSE_COLUMNS,
   BROWSE_DATE_ENTRIES,
   BROWSE_FILTERS,
+  BROWSE_MODES,
   EMPTY_BROWSE_RESPONSE,
 } from '../data/browse-data';
 import {
@@ -12,6 +13,7 @@ import {
   BrowseFilter,
   BrowseFilterDefinition,
   BrowseLink,
+  BrowseMode,
   BrowseNode,
   BrowseQuery,
   BrowseResponse,
@@ -33,6 +35,11 @@ export class BrowseDataService {
       ...EMPTY_BROWSE_RESPONSE,
       columns,
     };
+  }
+
+  async loadBrowseModes(abortSignal: AbortSignal): Promise<readonly BrowseMode[]> {
+    await this.simulateLatency(abortSignal, 100);
+    return BROWSE_MODES;
   }
 
   async loadToolbarFilters(abortSignal: AbortSignal): Promise<readonly BrowseFilter[]> {
@@ -76,8 +83,13 @@ export class BrowseDataService {
     const children = (node.children ?? [])
       .map((child) => this.filterNode(child, query, nodeFilters))
       .filter((child): child is BrowseNode => child !== null);
+    const abstractMatches =
+      !!node.abstract &&
+      this.matchesMode(nodeFilters, query.modeId) &&
+      this.matchesSelectedFilters(nodeFilters, query.selectedFilters) &&
+      this.matchesDateFilters(node.date ?? '2026-01-01', query.dateFilters);
 
-    if (links.length === 0 && children.length === 0) {
+    if (links.length === 0 && children.length === 0 && !abstractMatches) {
       return null;
     }
 
@@ -99,9 +111,26 @@ export class BrowseDataService {
     });
 
     return (
+      this.matchesMode(linkFilters, query.modeId) &&
       this.matchesSelectedFilters(linkFilters, query.selectedFilters) &&
       this.matchesDateFilters(link.date, query.dateFilters)
     );
+  }
+
+  private matchesMode(candidateFilters: SelectedFilterMap, modeId: string): boolean {
+    const documentTypes = candidateFilters.documentType ?? [];
+
+    if (modeId === 'place-summaries') {
+      return documentTypes.some((type) => ['brief', 'case-study', 'guide'].includes(type));
+    }
+
+    if (modeId === 'benchmark-matrices') {
+      return documentTypes.some((type) =>
+        ['atlas', 'dashboard', 'directory', 'scorecard', 'tracker'].includes(type),
+      );
+    }
+
+    return true;
   }
 
   private matchesSelectedFilters(

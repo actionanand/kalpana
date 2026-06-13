@@ -11,6 +11,13 @@ export type BrowseDateKey = 'publishedOn' | 'updatedOn' | 'reviewedOn' | 'effect
 export type DateOperator = 'after' | 'before' | 'between';
 export type SelectedFilterMap = Partial<Record<BrowseSelectionKey, readonly string[]>>;
 
+export interface BrowseMode {
+  readonly id: string;
+  readonly label: string;
+  readonly title: string;
+  readonly subtitle: string;
+}
+
 export interface BrowseLink {
   readonly label: string;
   readonly href: string;
@@ -22,6 +29,8 @@ export interface BrowseLink {
 export interface BrowseNode {
   readonly id: string;
   readonly title: string;
+  readonly href?: string;
+  readonly abstract?: string;
   readonly expanded?: boolean;
   readonly filterIds?: SelectedFilterMap;
   readonly date?: string;
@@ -43,6 +52,7 @@ export interface BrowseResponse {
 }
 
 export interface BrowseQuery {
+  readonly modeId: string;
   readonly selectedFilters: SelectedFilterMap;
   readonly dateFilters: readonly BrowseDateSelection[];
 }
