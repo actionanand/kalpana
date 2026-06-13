@@ -149,17 +149,17 @@ export class BrowseMoreFiltersDialogComponent {
     return selectedCount > 0 && selectedCount < optionIds.length;
   }
 
-  protected toggleSelectAll(event: Event): void {
+  protected toggleSelectAll(): void {
     const filter = this.activeFilter();
-    const checkbox = event.target as HTMLInputElement | null;
     if (!filter) {
       return;
     }
 
     const visibleIds = this.visibleOptionIds();
+    const shouldSelect = !this.allVisibleSelected();
     this.draftFilters.update((filters) => ({
       ...filters,
-      [filter.key]: checkbox?.checked
+      [filter.key]: shouldSelect
         ? [...new Set([...(filters[filter.key] ?? []), ...visibleIds])]
         : (filters[filter.key] ?? []).filter((id) => !visibleIds.includes(id)),
     }));

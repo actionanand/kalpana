@@ -18,6 +18,8 @@ import {
 } from '../data/browse.models';
 import { BrowseDataService } from '../services/browse-data.service';
 
+const EMPTY_SELECTED_IDS: readonly string[] = [];
+
 @Component({
   selector: 'app-two-column-browse',
   imports: [
@@ -154,7 +156,7 @@ export class TwoColumnBrowseComponent {
   }
 
   protected selectedIdsFor(filter: BrowseFilter): readonly string[] {
-    return this.selectedFilters()[filter.key] ?? [];
+    return this.selectedFilters()[filter.key] ?? EMPTY_SELECTED_IDS;
   }
 
   protected expandAll(): void {

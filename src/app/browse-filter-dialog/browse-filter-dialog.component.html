@@ -33,7 +33,7 @@
           type="checkbox"
           [checked]="allVisibleSelected()"
           [indeterminate]="visibleIndeterminate()"
-          (change)="toggleSelectAll($event)"
+          (change)="toggleSelectAll()"
         />
         <span>Select all</span>
       </label>
@@ -120,7 +120,7 @@
                     type="checkbox"
                     [checked]="isGroupSelected(group)"
                     [indeterminate]="isGroupIndeterminate(group)"
-                    (change)="toggleGroup(group, $event)"
+                    (change)="toggleGroup(group)"
                   />
                   <span class="fd-region-name">{{ group.label }}</span>
                 </label>

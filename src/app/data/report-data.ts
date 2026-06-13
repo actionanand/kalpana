@@ -471,4 +471,32 @@ export const REPORT_CONTENT: readonly ReportContent[] = [
       'Follow-up actions for analysts, planners, and implementation teams.',
     ],
   },
+  {
+    id: '1034',
+    title: 'United Kingdom transit access brief',
+    country: 'United Kingdom',
+    publishedOn: '2025-10-19',
+    category: 'Mobility planning evidence',
+    summary:
+      'A focused mobility report for the United Kingdom covering transit access patterns, regional interchange constraints, and near-term planning opportunities.',
+    highlights: [
+      'Summarizes access indicators for regional and metropolitan transit corridors.',
+      'Compares service reliability, interchange quality, and inclusive access measures.',
+      'Identifies practical follow-up actions for planners and operators.',
+    ],
+  },
+  {
+    id: '1035',
+    title: 'Belgium corridor coordination case study',
+    country: 'Belgium',
+    publishedOn: '2026-01-07',
+    category: 'Mobility planning evidence',
+    summary:
+      'A corridor coordination case study for Belgium with notes on multimodal planning, cross-jurisdiction delivery, and operator-facing service checks.',
+    highlights: [
+      'Reviews corridor handoff points between local and regional delivery teams.',
+      'Highlights map-based evidence used for service planning and public updates.',
+      'Includes delivery checks for operators, planners, and regional coordinators.',
+    ],
+  },
 ];

@@ -149,25 +149,22 @@ export class BrowseFilterDialogComponent {
     );
   }
 
-  protected toggleSelectAll(event: Event): void {
-    const checkbox = event.target as HTMLInputElement | null;
-    const checked = !!checkbox?.checked;
+  protected toggleSelectAll(): void {
+    const shouldSelect = !this.allVisibleSelected();
     const visibleIds = this.allVisibleOptions().map((option) => option.id);
 
     this.draftSelectedIds.set(
-      checked
+      shouldSelect
         ? [...new Set([...this.draftSelectedIds(), ...visibleIds])]
         : this.draftSelectedIds().filter((id) => !visibleIds.includes(id)),
     );
   }
 
-  protected toggleGroup(group: FilterGroup, event: Event): void {
-    const checkbox = event.target as HTMLInputElement | null;
-    const checked = !!checkbox?.checked;
-
+  protected toggleGroup(group: FilterGroup): void {
+    const shouldSelect = !this.isGroupSelected(group);
     const groupIds = new Set(group.options.map((option) => option.id));
     this.draftSelectedIds.update((selectedIds) =>
-      checked
+      shouldSelect
         ? [...new Set([...selectedIds, ...groupIds])]
         : selectedIds.filter((id) => !groupIds.has(id)),
     );
