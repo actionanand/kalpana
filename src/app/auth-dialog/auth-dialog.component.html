@@ -33,7 +33,9 @@
               [attr.aria-label]="passwordVisible() ? 'Hide password' : 'Show password'"
               (click)="togglePasswordVisibility()"
             >
-              {{ passwordVisible() ? 'Hide' : 'Show' }}
+              <span class="material-symbols-outlined" aria-hidden="true">
+                {{ passwordVisible() ? 'visibility_off' : 'visibility' }}
+              </span>
             </button>
           </span>
         </label>
