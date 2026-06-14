@@ -176,7 +176,7 @@ export class TwoColumnBrowseComponent {
       return filter.options.find((option) => option.id === selectedIds[0])?.label ?? filter.label;
     }
 
-    return `${selectedIds.length} selected`;
+    return filter.label;
   }
 
   private moreFilterCount(): number {

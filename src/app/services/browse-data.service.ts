@@ -158,7 +158,7 @@ export class BrowseDataService {
     const candidateTime = new Date(dateValue).getTime();
     return dateFilters.every((filter) => {
       const fromTime = new Date(filter.date).getTime();
-      const toTime = filter.dateTo ? new Date(filter.dateTo).getTime() : fromTime;
+      const toTime = new Date(filter.dateTo ?? this.todayDateString()).getTime();
 
       if (filter.operator === 'before') {
         return candidateTime <= fromTime;
@@ -201,5 +201,13 @@ export class BrowseDataService {
         { once: true },
       );
     });
+  }
+
+  private todayDateString(): string {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = `${date.getMonth() + 1}`.padStart(2, '0');
+    const day = `${date.getDate()}`.padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 }

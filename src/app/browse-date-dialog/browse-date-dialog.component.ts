@@ -88,7 +88,7 @@ export class BrowseDateDialogComponent {
           key: draft.key,
           operator: draft.operator,
           date: draft.date,
-          dateTo: draft.operator === 'between' && draft.dateTo ? draft.dateTo : undefined,
+          dateTo: draft.operator === 'between' ? draft.dateTo || this.todayDateString() : undefined,
         })),
     );
   }
@@ -97,5 +97,13 @@ export class BrowseDateDialogComponent {
     this.drafts.update((drafts) =>
       drafts.map((draft) => (draft.key === key ? update(draft) : draft)),
     );
+  }
+
+  private todayDateString(): string {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = `${date.getMonth() + 1}`.padStart(2, '0');
+    const day = `${date.getDate()}`.padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 }

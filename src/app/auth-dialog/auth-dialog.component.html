@@ -1,0 +1,37 @@
+@if (authService.promptOpen()) {
+  <div class="auth-backdrop">
+    <section
+      class="auth-card"
+      [class.auth-card--wobble]="wobble()"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="auth-title"
+      aria-describedby="auth-description"
+      (animationend)="resetWobble()"
+    >
+      <p class="auth-kicker">Authentication required</p>
+      <h2 id="auth-title">Sign in to continue</h2>
+      <p id="auth-description">Enter a user name and password to open this workspace page.</p>
+
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <label>
+          <span>User name</span>
+          <input #usernameInput type="text" autocomplete="username" formControlName="username" />
+        </label>
+
+        <label>
+          <span>Password</span>
+          <input type="password" autocomplete="current-password" formControlName="password" />
+        </label>
+
+        @if (errorMessage()) {
+          <p class="auth-error" role="alert">{{ errorMessage() }}</p>
+        }
+
+        <button type="submit" [disabled]="busy()">
+          {{ busy() ? 'Checking...' : 'Continue' }}
+        </button>
+      </form>
+    </section>
+  </div>
+}
