@@ -1,0 +1,88 @@
+<div class="browse-toolbar" aria-label="Browse controls">
+  <div class="browse-filter-group" aria-label="Filters">
+    <span class="filter-label">
+      <svg
+        class="filter-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 -960 960 960"
+        aria-hidden="true"
+      >
+        <path d="M400-240v-80h160v80H400ZM240-440v-80h480v80H240ZM120-640v-80h720v80H120Z" />
+      </svg>
+      FILTERS
+    </span>
+
+    @for (filter of filters(); track filter.key) {
+      @let summary = activeSummary(filter);
+      <button
+        type="button"
+        class="filter-button"
+        [class.filter-button--loading]="isLoading(filter.key)"
+        [class.filter-button--active]="(summary?.count ?? 0) > 0"
+        [disabled]="isLoading(filter.key)"
+        (click)="filterSelected.emit(filter)"
+      >
+        @if (isLoading(filter.key)) {
+          <span class="loading-dot" aria-hidden="true"></span>
+          Loading {{ filter.label }}
+        } @else {
+          {{ summary?.label ?? filter.label }}
+        }
+        @if (!isLoading(filter.key) && summary?.count) {
+          <span class="active-badge">{{ summary?.count }}</span>
+        }
+      </button>
+    }
+
+    @let dateSummary = summaryFor('date');
+    <button
+      type="button"
+      class="filter-button"
+      [class.filter-button--loading]="isLoading('date')"
+      [class.filter-button--active]="(dateSummary?.count ?? 0) > 0"
+      [disabled]="isLoading('date')"
+      (click)="dateSelected.emit()"
+    >
+      @if (isLoading('date')) {
+        <span class="loading-dot" aria-hidden="true"></span>
+        Loading Date
+      } @else {
+        Date
+      }
+      @if (!isLoading('date') && dateSummary?.count) {
+        <span class="active-badge">{{ dateSummary?.count }}</span>
+      }
+    </button>
+
+    @let moreSummary = summaryFor('more');
+    <button
+      type="button"
+      class="filter-button"
+      [class.filter-button--loading]="isLoading('more')"
+      [class.filter-button--active]="(moreSummary?.count ?? 0) > 0"
+      [disabled]="isLoading('more')"
+      (click)="moreSelected.emit()"
+    >
+      @if (isLoading('more')) {
+        <span class="loading-dot" aria-hidden="true"></span>
+        Loading More
+      } @else {
+        More
+      }
+      @if (!isLoading('more') && moreSummary?.count) {
+        <span class="active-badge">{{ moreSummary?.count }}</span>
+      }
+    </button>
+  </div>
+
+  <div class="browse-actions" aria-label="Panel controls">
+    <button type="button" class="action-button" (click)="expandAllSelected.emit()">
+      <span class="expand-icon" aria-hidden="true"></span>
+      Expand all
+    </button>
+    <button type="button" class="action-button" (click)="collapseAllSelected.emit()">
+      <span class="collapse-icon" aria-hidden="true"></span>
+      Collapse all
+    </button>
+  </div>
+</div>

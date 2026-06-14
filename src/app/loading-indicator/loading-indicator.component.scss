@@ -1,0 +1,27 @@
+:host {
+  display: block;
+}
+
+.loader {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: #34404b;
+  font-size: 16px;
+  font-weight: 650;
+}
+
+.loader-ring {
+  width: 28px;
+  height: 28px;
+  border: 3px solid #d4dbe1;
+  border-top-color: #27384a;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

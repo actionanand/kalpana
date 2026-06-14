@@ -1,0 +1,176 @@
+:host {
+  display: block;
+}
+
+.browse-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 56px;
+  margin-bottom: 14px;
+}
+
+.browse-filter-group,
+.browse-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 22px;
+}
+
+.browse-actions {
+  justify-content: flex-end;
+  gap: 28px;
+}
+
+.filter-label,
+.filter-button,
+.action-button {
+  border: 0;
+  background: transparent;
+  color: #0f1720;
+  font: inherit;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.filter-label,
+.filter-button,
+.action-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.filter-label {
+  font-weight: 700;
+}
+
+.filter-button,
+.action-button {
+  min-height: 40px;
+  padding: 8px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.filter-button:hover,
+.filter-button:focus-visible,
+.action-button:hover,
+.action-button:focus-visible,
+.filter-button--active {
+  background: #e9ecef;
+}
+
+.filter-button--loading,
+.filter-button:disabled {
+  color: #5d6874;
+  cursor: wait;
+}
+
+.filter-button:focus-visible,
+.action-button:focus-visible {
+  outline: 2px solid #075fb8;
+  outline-offset: 3px;
+}
+
+.active-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: #27384a;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.loading-dot {
+  width: 14px;
+  height: 14px;
+  border: 2px solid #aeb7bf;
+  border-top-color: #27384a;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.filter-icon,
+.expand-icon,
+.collapse-icon {
+  position: relative;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  color: currentColor;
+}
+
+.filter-icon {
+  fill: currentColor;
+}
+
+.expand-icon::before,
+.expand-icon::after,
+.collapse-icon::before,
+.collapse-icon::after {
+  position: absolute;
+  left: 7px;
+  width: 5px;
+  height: 5px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  content: '';
+}
+
+.expand-icon::before {
+  top: 2px;
+  transform: rotate(45deg);
+}
+
+.expand-icon::after {
+  bottom: 2px;
+  transform: rotate(225deg);
+}
+
+.collapse-icon::before {
+  top: 1px;
+  transform: rotate(225deg);
+}
+
+.collapse-icon::after {
+  bottom: 1px;
+  transform: rotate(45deg);
+}
+
+@media (max-width: 980px) {
+  .browse-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .browse-actions {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .browse-filter-group,
+  .browse-actions {
+    gap: 10px;
+  }
+
+  .filter-label,
+  .filter-button,
+  .action-button {
+    font-size: 14px;
+  }
+}

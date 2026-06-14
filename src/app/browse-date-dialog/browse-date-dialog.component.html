@@ -1,0 +1,67 @@
+<div class="dialog-backdrop">
+  <section
+    class="mfd-container mfd-container--date-only"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="date-dialog-title"
+  >
+    <header class="mfd-header">
+      <h2 id="date-dialog-title" class="mfd-title">Select dates</h2>
+      <button type="button" class="mfd-close-btn" aria-label="Close dialog" (click)="closed.emit()">
+        <span aria-hidden="true"></span>
+      </button>
+    </header>
+
+    <div class="mfd-date-list">
+      @for (draft of drafts(); track draft.key) {
+        <div class="mfd-date-block">
+          <label class="mfd-date-label" [for]="draft.key + '-date'">{{ draft.label }}</label>
+          <div class="mfd-date-controls">
+            <select
+              class="mfd-date-op-btn"
+              [value]="draft.operator"
+              [attr.aria-label]="draft.label + ' operator'"
+              (change)="updateOperator(draft.key, $event)"
+            >
+              <option value="after">After</option>
+              <option value="before">Before</option>
+              <option value="between">Between</option>
+            </select>
+
+            <span class="date-field-wrap">
+              <input
+                class="mfd-date-field"
+                [id]="draft.key + '-date'"
+                type="date"
+                [value]="draft.date"
+                [attr.aria-label]="draft.label + ' date'"
+                (change)="updateDate(draft.key, $event)"
+              />
+            </span>
+
+            @if (draft.operator === 'between') {
+              <span class="mfd-date-and">and</span>
+              <span class="date-field-wrap">
+                <input
+                  class="mfd-date-field"
+                  type="date"
+                  [value]="draft.dateTo"
+                  [attr.aria-label]="draft.label + ' end date'"
+                  (change)="updateDateTo(draft.key, $event)"
+                />
+              </span>
+            }
+          </div>
+        </div>
+      }
+    </div>
+
+    <footer class="mfd-footer">
+      <span class="mfd-summary">{{ summary() }}</span>
+      <div class="mfd-footer-actions">
+        <button type="button" class="mfd-btn-cancel" (click)="closed.emit()">Cancel</button>
+        <button type="button" class="mfd-btn-apply" (click)="apply()">Apply</button>
+      </div>
+    </footer>
+  </section>
+</div>

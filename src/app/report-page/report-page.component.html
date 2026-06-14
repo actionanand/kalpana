@@ -1,0 +1,46 @@
+<main class="report-page">
+  @if (reportResource.isLoading()) {
+    <section class="report-state">
+      <app-loading-indicator [label]="'Resolving report ' + reportId() + '...'" />
+    </section>
+  } @else if (reportResource.value(); as report) {
+    <a class="back-link" routerLink="/">Back to browse</a>
+
+    <article class="report-card">
+      <p class="report-kicker">Report {{ report.id }}</p>
+      <h1>{{ report.title }}</h1>
+      <dl class="report-meta">
+        <div>
+          <dt>Country / territory</dt>
+          <dd>{{ report.country }}</dd>
+        </div>
+        <div>
+          <dt>Published</dt>
+          <dd>{{ report.publishedOn }}</dd>
+        </div>
+        <div>
+          <dt>Category</dt>
+          <dd>{{ report.category }}</dd>
+        </div>
+      </dl>
+
+      <p class="report-summary">{{ report.summary }}</p>
+
+      <section aria-labelledby="report-highlights-title">
+        <h2 id="report-highlights-title">Highlights</h2>
+        <ul>
+          @for (highlight of report.highlights; track highlight) {
+            <li>{{ highlight }}</li>
+          }
+        </ul>
+      </section>
+    </article>
+  } @else {
+    <section class="report-state report-state--error" role="alert">
+      <p class="report-kicker">Report {{ reportId() }}</p>
+      <h1>You don't have access to that Report</h1>
+      <p>Please contact your workspace administrator or support team to request access.</p>
+      <a class="back-link" routerLink="/">Back to browse</a>
+    </section>
+  }
+</main>

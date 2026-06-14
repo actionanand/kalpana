@@ -1,0 +1,118 @@
+<div class="browse-panel">
+  @if (columns().length === 0) {
+    <p class="empty-state">No browse data matches the selected filters.</p>
+  } @else {
+    <div class="browse-columns">
+      @for (column of columns(); track column.id) {
+        <article class="browse-column">
+          <h2>{{ column.title }}</h2>
+
+          <div class="section-list">
+            @for (section of column.sections; track section.id) {
+              <section class="topic-section">
+                <header class="topic-header">
+                  <button
+                    type="button"
+                    class="chevron-button"
+                    [attr.aria-label]="
+                      (isSectionExpanded(section) ? 'Collapse ' : 'Expand ') + section.title
+                    "
+                    [attr.aria-expanded]="isSectionExpanded(section)"
+                    [disabled]="!hasSectionContent(section)"
+                    (click)="toggleSection(section)"
+                  >
+                    <span
+                      class="chevron"
+                      [class.chevron--open]="isSectionExpanded(section)"
+                      aria-hidden="true"
+                    ></span>
+                  </button>
+                  <h3>{{ section.title }}</h3>
+                  <span class="topic-rule" aria-hidden="true"></span>
+                </header>
+
+                @if (isSectionExpanded(section)) {
+                  <div class="topic-body">
+                    @if (section.links?.length) {
+                      <p class="link-list">
+                        @for (link of section.links; track link.label; let last = $last) {
+                          <a [routerLink]="link.href">{{ link.label }}</a>
+                          @if (!last) {
+                            <span class="dot-separator" aria-hidden="true"></span>
+                          }
+                        }
+                      </p>
+                    }
+
+                    @if (section.children?.length) {
+                      <ng-container
+                        [ngTemplateOutlet]="itemList"
+                        [ngTemplateOutletContext]="{ items: section.children, level: 0 }"
+                      >
+                      </ng-container>
+                    }
+                  </div>
+                }
+              </section>
+            }
+          </div>
+        </article>
+      }
+    </div>
+  }
+</div>
+
+<p class="sr-only" aria-live="polite">{{ itemCount() }} browse groups available.</p>
+
+<ng-template #itemList let-items="items" let-level="level">
+  @for (item of items; track item.id) {
+    <div class="node-row" [class.node-row--nested]="level > 0">
+      <button
+        type="button"
+        class="chevron-button"
+        [attr.aria-label]="(isItemExpanded(item) ? 'Collapse ' : 'Expand ') + item.title"
+        [attr.aria-expanded]="isItemExpanded(item)"
+        [disabled]="!hasItemContent(item)"
+        (click)="toggleItem(item)"
+      >
+        <span
+          class="chevron"
+          [class.chevron--open]="isItemExpanded(item)"
+          aria-hidden="true"
+        ></span>
+      </button>
+      @if (item.href) {
+        <a class="node-title node-title--link" [routerLink]="item.href">{{ item.title }}</a>
+      } @else {
+        <span class="node-title">{{ item.title }}</span>
+      }
+    </div>
+
+    @if (isItemExpanded(item)) {
+      <div class="node-content">
+        @if (item.abstract) {
+          <p class="node-abstract">{{ item.abstract }}</p>
+        }
+
+        @if (item.links?.length) {
+          <p class="link-list">
+            @for (link of item.links; track link.label; let last = $last) {
+              <a [routerLink]="link.href">{{ link.label }}</a>
+              @if (!last) {
+                <span class="dot-separator" aria-hidden="true"></span>
+              }
+            }
+          </p>
+        }
+
+        @if (item.children?.length) {
+          <ng-container
+            [ngTemplateOutlet]="itemList"
+            [ngTemplateOutletContext]="{ items: item.children, level: level + 1 }"
+          >
+          </ng-container>
+        }
+      </div>
+    }
+  }
+</ng-template>

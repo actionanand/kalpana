@@ -1,0 +1,128 @@
+<div class="dialog-backdrop">
+  <section
+    class="mfd-container"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="more-dialog-title"
+  >
+    <header class="mfd-header">
+      <h2 id="more-dialog-title" class="mfd-title">More filters</h2>
+      <button type="button" class="mfd-close-btn" aria-label="Close dialog" (click)="closed.emit()">
+        <span aria-hidden="true"></span>
+      </button>
+    </header>
+
+    <div class="mfd-body">
+      <nav class="mfd-sidebar" aria-label="More filter categories">
+        @for (filter of filters(); track filter.key) {
+          <button
+            type="button"
+            class="mfd-sidebar-item"
+            [class.mfd-sidebar-item--active]="activeFilter()?.key === filter.key"
+            (click)="selectCategory(filter)"
+          >
+            <span class="mfd-sidebar-label">{{ filter.label }}</span>
+            @if (activeCount(filter) > 0) {
+              <span class="mfd-sidebar-badge">{{ activeCount(filter) }}</span>
+            }
+            <span class="mfd-sidebar-arrow" aria-hidden="true"></span>
+          </button>
+        }
+      </nav>
+
+      <div class="mfd-content">
+        @if (activeFilter(); as filter) {
+          @if (filter.searchable) {
+            <label class="mfd-search-row">
+              <span class="mfd-search-icon" aria-hidden="true"></span>
+              <span class="sr-only">Search {{ filter.label }}</span>
+              <input
+                class="mfd-search-input"
+                type="search"
+                [placeholder]="'Search ' + filter.label.toLowerCase()"
+                [value]="currentSearch()"
+                (input)="updateSearch($event)"
+              />
+            </label>
+          }
+
+          <div class="mfd-toolbar">
+            <label class="mfd-checkbox">
+              <input
+                type="checkbox"
+                [checked]="allVisibleSelected()"
+                [indeterminate]="visibleIndeterminate()"
+                (change)="toggleSelectAll()"
+              />
+              <span>Select all</span>
+            </label>
+
+            <div class="mfd-sort-wrapper">
+              <button
+                type="button"
+                class="mfd-sort-btn"
+                [attr.aria-expanded]="sortMenuOpen()"
+                aria-haspopup="menu"
+                (click)="toggleSortMenu()"
+              >
+                {{ sortLabel() }}
+                <span class="mfd-sort-arrow" aria-hidden="true"></span>
+              </button>
+
+              @if (sortMenuOpen()) {
+                <div class="mfd-sort-menu" role="menu">
+                  <button
+                    type="button"
+                    role="menuitemradio"
+                    class="mfd-sort-menu-item"
+                    [class.mfd-sort-menu-item--active]="currentSortMode() === 'alpha'"
+                    [attr.aria-checked]="currentSortMode() === 'alpha'"
+                    (click)="setSortMode('alpha')"
+                  >
+                    Sort alphabetically
+                  </button>
+                  <button
+                    type="button"
+                    role="menuitemradio"
+                    class="mfd-sort-menu-item"
+                    [class.mfd-sort-menu-item--active]="currentSortMode() === 'frequency'"
+                    [attr.aria-checked]="currentSortMode() === 'frequency'"
+                    (click)="setSortMode('frequency')"
+                  >
+                    Sort by frequency
+                  </button>
+                </div>
+              }
+            </div>
+          </div>
+
+          <div class="mfd-divider"></div>
+
+          <div class="mfd-options-list">
+            @for (group of groups(); track group.id) {
+              @for (option of group.options; track option.id) {
+                <label class="mfd-option mfd-checkbox">
+                  <input
+                    type="checkbox"
+                    [checked]="isSelected(option.id)"
+                    (change)="toggleOption(option.id)"
+                  />
+                  <span class="mfd-opt-name">{{ option.label }}</span>
+                  <span class="mfd-opt-count">({{ option.count }})</span>
+                </label>
+              }
+            }
+          </div>
+        }
+      </div>
+    </div>
+
+    <footer class="mfd-footer">
+      <span class="mfd-summary">{{ summary() }}</span>
+      <div class="mfd-footer-actions">
+        <button type="button" class="mfd-btn-cancel" (click)="closed.emit()">Cancel</button>
+        <button type="button" class="mfd-btn-apply" (click)="apply()">Apply</button>
+      </div>
+    </footer>
+  </section>
+</div>
