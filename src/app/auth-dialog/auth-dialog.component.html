@@ -21,7 +21,21 @@
 
         <label>
           <span>Password</span>
-          <input type="password" autocomplete="current-password" formControlName="password" />
+          <span class="password-field">
+            <input
+              [type]="passwordVisible() ? 'text' : 'password'"
+              autocomplete="current-password"
+              formControlName="password"
+            />
+            <button
+              type="button"
+              class="password-toggle"
+              [attr.aria-label]="passwordVisible() ? 'Hide password' : 'Show password'"
+              (click)="togglePasswordVisibility()"
+            >
+              {{ passwordVisible() ? 'Hide' : 'Show' }}
+            </button>
+          </span>
         </label>
 
         @if (errorMessage()) {

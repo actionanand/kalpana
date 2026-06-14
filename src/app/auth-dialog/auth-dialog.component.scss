@@ -66,6 +66,7 @@ label {
 }
 
 input {
+  width: 100%;
   min-height: 42px;
   border: 1px solid #c8ced4;
   border-radius: 4px;
@@ -81,12 +82,40 @@ input:focus-visible {
   outline-offset: 2px;
 }
 
+.password-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-field input {
+  padding-right: 72px;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 6px;
+  min-height: 30px;
+  border: 0;
+  border-radius: 3px;
+  padding: 4px 10px;
+  background: transparent;
+  color: #25313d;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.password-toggle:hover,
+.password-toggle:focus-visible {
+  background: #edf1f4;
+}
+
 .auth-error {
   color: #9f1d1d;
   font-weight: 700;
 }
 
-button {
+form > button {
   justify-self: end;
   min-height: 42px;
   border: 0;
@@ -99,17 +128,18 @@ button {
   cursor: pointer;
 }
 
-button:hover,
-button:focus-visible {
+form > button:hover,
+form > button:focus-visible {
   background: #2d2d50;
 }
 
-button:focus-visible {
+form > button:focus-visible,
+.password-toggle:focus-visible {
   outline: 2px solid #4b5560;
   outline-offset: 3px;
 }
 
-button:disabled {
+form > button:disabled {
   cursor: progress;
   opacity: 0.72;
 }
