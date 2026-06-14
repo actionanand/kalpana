@@ -18,6 +18,7 @@ export class AuthDialogComponent {
   protected readonly busy = signal(false);
   protected readonly errorMessage = signal('');
   protected readonly wobble = signal(false);
+  protected readonly passwordVisible = signal(false);
   protected readonly usernameInput = viewChild<ElementRef<HTMLInputElement>>('usernameInput');
 
   protected readonly form = new FormGroup<AuthForm>({
@@ -47,24 +48,25 @@ export class AuthDialogComponent {
     }
 
     this.busy.set(true);
-    let authenticated = false;
     try {
-      authenticated = await this.authService.login(
+      const authenticated = await this.authService.login(
         this.form.controls.username.value,
         this.form.controls.password.value,
       );
+      if (!authenticated) {
+        this.form.controls.password.setValue('');
+        this.showError('The password is incorrect.');
+      }
     } catch {
       this.showError('Authentication could not be completed in this browser.');
       this.form.controls.password.setValue('');
-      return;
     } finally {
       this.busy.set(false);
     }
+  }
 
-    if (!authenticated) {
-      this.form.controls.password.setValue('');
-      this.showError('The password is incorrect.');
-    }
+  protected togglePasswordVisibility(): void {
+    this.passwordVisible.update((visible) => !visible);
   }
 
   protected resetWobble(): void {

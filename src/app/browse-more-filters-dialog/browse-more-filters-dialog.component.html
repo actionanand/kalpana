@@ -34,7 +34,9 @@
         @if (activeFilter(); as filter) {
           @if (filter.searchable) {
             <label class="mfd-search-row">
-              <span class="mfd-search-icon" aria-hidden="true"></span>
+              <span class="mfd-search-icon material-symbols-outlined" aria-hidden="true">
+                search
+              </span>
               <span class="sr-only">Search {{ filter.label }}</span>
               <input
                 class="mfd-search-input"

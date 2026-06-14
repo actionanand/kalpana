@@ -499,4 +499,88 @@ export const REPORT_CONTENT: readonly ReportContent[] = [
       'Includes delivery checks for operators, planners, and regional coordinators.',
     ],
   },
+  {
+    id: '1036',
+    title: 'USA heat readiness tracker',
+    country: 'USA',
+    publishedOn: '2026-01-18',
+    category: 'Climate operations evidence',
+    summary:
+      'A heat readiness tracker for USA city teams comparing seasonal alert thresholds, cooling site coverage, and resident communication workflows.',
+    highlights: [
+      'Compares heat alert triggers across local operating teams.',
+      'Summarizes cooling site coverage and service readiness indicators.',
+      'Lists follow-up checks for analysts and resilience leads.',
+    ],
+  },
+  {
+    id: '1037',
+    title: 'Germany heat adaptation guide',
+    country: 'Germany',
+    publishedOn: '2025-12-09',
+    category: 'Climate operations evidence',
+    summary:
+      'A planning guide for Germany covering heat adaptation actions, public-space shading priorities, and service coordination across urban districts.',
+    highlights: [
+      'Connects heat adaptation actions to neighborhood delivery plans.',
+      'Highlights field review checkpoints for public realm teams.',
+      'Includes planning notes for operators and policy leads.',
+    ],
+  },
+  {
+    id: '1038',
+    title: 'China urban heat atlas',
+    country: 'China',
+    publishedOn: '2025-09-15',
+    category: 'Climate operations evidence',
+    summary:
+      'A heat atlas for China with map-based evidence on exposure patterns, cooling corridors, and district-level resilience opportunities.',
+    highlights: [
+      'Maps exposure patterns across dense urban districts.',
+      'Compares corridor cooling opportunities and open-space access.',
+      'Summarizes evidence needs for researchers and planners.',
+    ],
+  },
+  {
+    id: '1039',
+    title: 'Australia coastal adaptation case study',
+    country: 'Australia',
+    publishedOn: '2026-04-11',
+    category: 'Coastal planning evidence',
+    summary:
+      'A coastal adaptation case study for Australia covering shoreline planning, community risk communication, and infrastructure sequencing.',
+    highlights: [
+      'Reviews coastal planning actions for exposed local areas.',
+      'Summarizes community communication and risk review checkpoints.',
+      'Identifies next steps for planners and regional partners.',
+    ],
+  },
+  {
+    id: '1040',
+    title: 'South Africa water resilience brief',
+    country: 'South Africa',
+    publishedOn: '2025-11-27',
+    category: 'Water systems evidence',
+    summary:
+      'A water resilience brief for South Africa focused on service continuity, catchment risk notes, and field operations planning.',
+    highlights: [
+      'Summarizes operating assumptions for local water service teams.',
+      'Highlights catchment risk signals and response priorities.',
+      'Includes practical follow-up checks for operators.',
+    ],
+  },
+  {
+    id: '1041',
+    title: 'United Arab Emirates water systems scorecard',
+    country: 'United Arab Emirates',
+    publishedOn: '2026-02-06',
+    category: 'Water systems evidence',
+    summary:
+      'A water systems scorecard for the United Arab Emirates comparing service indicators, infrastructure readiness, and planning controls.',
+    highlights: [
+      'Compares water service indicators used by national and local teams.',
+      'Highlights infrastructure readiness and monitoring checkpoints.',
+      'Summarizes action areas for analysts and delivery leads.',
+    ],
+  },
 ];
