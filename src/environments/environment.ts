@@ -1,5 +1,5 @@
 export const environment = {
   auth: {
-    passwordSha1: '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8',
+    passwordSha1: 'PASSWORD_HASH_PLACEHOLDER', // To be replaced during build with actual hash,
   },
 } as const;
