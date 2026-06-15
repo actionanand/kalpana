@@ -43,7 +43,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
         links: [
           {
             label: 'India',
-            href: '/browse/report/1001',
+            href: '/report/1001',
             territoryId: 'india',
             date: '2026-04-18',
             filterIds: {
@@ -60,7 +60,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
           },
           {
             label: 'Singapore',
-            href: '/browse/report/1002',
+            href: '/report/1002',
             territoryId: 'singapore',
             date: '2025-12-03',
             filterIds: {
@@ -77,7 +77,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
           },
           {
             label: 'Netherlands',
-            href: '/browse/report/1003',
+            href: '/report/1003',
             territoryId: 'netherlands',
             date: '2025-09-29',
             filterIds: {
@@ -94,7 +94,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
           },
           {
             label: 'Japan',
-            href: '/browse/report/1004',
+            href: '/report/1004',
             territoryId: 'japan',
             date: '2026-02-16',
             filterIds: {
@@ -111,7 +111,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
           },
           {
             label: 'UK',
-            href: '/browse/report/1034',
+            href: '/report/1034',
             territoryId: 'uk',
             date: '2025-10-19',
             filterIds: {
@@ -128,7 +128,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
           },
           {
             label: 'Belgium',
-            href: '/browse/report/1035',
+            href: '/report/1035',
             territoryId: 'belgium',
             date: '2026-01-07',
             filterIds: {
@@ -156,7 +156,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
         links: [
           {
             label: 'Brazil',
-            href: '/browse/report/1005',
+            href: '/report/1005',
             territoryId: 'brazil',
             date: '2025-11-11',
             filterIds: {
@@ -173,7 +173,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
           },
           {
             label: 'Canada',
-            href: '/browse/report/1006',
+            href: '/report/1006',
             territoryId: 'canada',
             date: '2026-01-23',
             filterIds: {
@@ -190,7 +190,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
           },
           {
             label: 'Mexico',
-            href: '/browse/report/1007',
+            href: '/report/1007',
             territoryId: 'mexico',
             date: '2025-06-14',
             filterIds: {
@@ -223,7 +223,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
             links: [
               {
                 label: 'Canada',
-                href: '/browse/report/1008',
+                href: '/report/1008',
                 territoryId: 'canada',
                 date: '2026-02-10',
                 filterIds: {
@@ -240,7 +240,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
               },
               {
                 label: 'Netherlands',
-                href: '/browse/report/1009',
+                href: '/report/1009',
                 territoryId: 'netherlands',
                 date: '2025-08-05',
                 filterIds: {
@@ -260,7 +260,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
           {
             id: 'shared-equity-model-summary',
             title: 'Shared equity model summary',
-            href: '/browse/report/1010',
+            href: '/report/1010',
             abstract:
               'This summary compares shared equity housing models, eligibility windows, resale formulas, and stewardship practices used by city housing teams.',
             date: '2026-03-19',
@@ -284,7 +284,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
             links: [
               {
                 label: 'India',
-                href: '/browse/report/1011',
+                href: '/report/1011',
                 territoryId: 'india',
                 date: '2025-10-14',
                 filterIds: {
@@ -301,7 +301,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
               },
               {
                 label: 'Brazil',
-                href: '/browse/report/1012',
+                href: '/report/1012',
                 territoryId: 'brazil',
                 date: '2024-12-20',
                 filterIds: {
@@ -336,7 +336,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
             links: [
               {
                 label: 'Estonia',
-                href: '/browse/report/1013',
+                href: '/report/1013',
                 territoryId: 'estonia',
                 date: '2026-03-05',
                 filterIds: {
@@ -353,7 +353,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
               },
               {
                 label: 'Singapore',
-                href: '/browse/report/1014',
+                href: '/report/1014',
                 territoryId: 'singapore',
                 date: '2025-07-16',
                 filterIds: {
@@ -377,7 +377,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
             links: [
               {
                 label: 'India',
-                href: '/browse/report/1015',
+                href: '/report/1015',
                 territoryId: 'india',
                 date: '2025-04-21',
                 filterIds: {
@@ -394,7 +394,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
               },
               {
                 label: 'Kenya',
-                href: '/browse/report/1016',
+                href: '/report/1016',
                 territoryId: 'kenya',
                 date: '2026-05-09',
                 filterIds: {
@@ -428,7 +428,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
             links: [
               {
                 label: 'Brazil',
-                href: '/browse/report/1017',
+                href: '/report/1017',
                 territoryId: 'brazil',
                 date: '2026-02-28',
                 filterIds: {
@@ -445,7 +445,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
               },
               {
                 label: 'Canada',
-                href: '/browse/report/1018',
+                href: '/report/1018',
                 territoryId: 'canada',
                 date: '2025-10-06',
                 filterIds: {
@@ -465,7 +465,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
           {
             id: 'grant-readiness-brief',
             title: 'Grant readiness brief',
-            href: '/browse/report/1019',
+            href: '/report/1019',
             abstract:
               'A short passage outlining how teams sequence community grants, local match requirements, and public reporting checkpoints across annual funding cycles.',
             date: '2025-12-18',
@@ -506,7 +506,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
             links: [
               {
                 label: 'Netherlands',
-                href: '/browse/report/1020',
+                href: '/report/1020',
                 territoryId: 'netherlands',
                 date: '2026-01-05',
                 filterIds: {
@@ -523,7 +523,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
               },
               {
                 label: 'Canada',
-                href: '/browse/report/1021',
+                href: '/report/1021',
                 territoryId: 'canada',
                 date: '2025-06-26',
                 filterIds: {
@@ -547,7 +547,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
             links: [
               {
                 label: 'Kenya',
-                href: '/browse/report/1022',
+                href: '/report/1022',
                 territoryId: 'kenya',
                 date: '2025-03-17',
                 filterIds: {
@@ -564,7 +564,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
               },
               {
                 label: 'Brazil',
-                href: '/browse/report/1023',
+                href: '/report/1023',
                 territoryId: 'brazil',
                 date: '2024-09-11',
                 filterIds: {
@@ -599,7 +599,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
             links: [
               {
                 label: 'India',
-                href: '/browse/report/1024',
+                href: '/report/1024',
                 territoryId: 'india',
                 date: '2026-04-02',
                 filterIds: {
@@ -616,7 +616,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
               },
               {
                 label: 'Singapore',
-                href: '/browse/report/1025',
+                href: '/report/1025',
                 territoryId: 'singapore',
                 date: '2025-02-08',
                 filterIds: {
@@ -636,7 +636,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
           {
             id: 'heat-threshold-note',
             title: 'Heat threshold note',
-            href: '/browse/report/1026',
+            href: '/report/1026',
             abstract:
               'This note explains how heat response thresholds are selected, reviewed, and communicated before seasonal operations begin.',
             date: '2026-04-27',
@@ -660,7 +660,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
             links: [
               {
                 label: 'Kenya',
-                href: '/browse/report/1027',
+                href: '/report/1027',
                 territoryId: 'kenya',
                 date: '2026-05-25',
                 filterIds: {
@@ -677,7 +677,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
               },
               {
                 label: 'Canada',
-                href: '/browse/report/1028',
+                href: '/report/1028',
                 territoryId: 'canada',
                 date: '2025-01-13',
                 filterIds: {
@@ -707,7 +707,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
         links: [
           {
             label: 'International',
-            href: '/browse/report/1029',
+            href: '/report/1029',
             territoryId: 'international',
             date: '2025-05-30',
             filterIds: {
@@ -724,7 +724,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
           },
           {
             label: 'Netherlands',
-            href: '/browse/report/1030',
+            href: '/report/1030',
             territoryId: 'netherlands',
             date: '2026-02-22',
             filterIds: {
@@ -741,7 +741,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
           },
           {
             label: 'Singapore',
-            href: '/browse/report/1031',
+            href: '/report/1031',
             territoryId: 'singapore',
             date: '2024-11-04',
             filterIds: {
@@ -769,7 +769,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
         links: [
           {
             label: 'International',
-            href: '/browse/report/1032',
+            href: '/report/1032',
             territoryId: 'international',
             date: '2026-03-12',
             filterIds: {
@@ -786,7 +786,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
           },
           {
             label: 'Estonia',
-            href: '/browse/report/1033',
+            href: '/report/1033',
             territoryId: 'estonia',
             date: '2025-09-02',
             filterIds: {
@@ -803,7 +803,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
           },
           {
             label: 'USA',
-            href: '/browse/report/1036',
+            href: '/report/1036',
             territoryId: 'usa',
             date: '2026-01-18',
             filterIds: {
@@ -820,7 +820,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
           },
           {
             label: 'Germany',
-            href: '/browse/report/1037',
+            href: '/report/1037',
             territoryId: 'germany',
             date: '2025-12-09',
             filterIds: {
@@ -837,7 +837,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
           },
           {
             label: 'China',
-            href: '/browse/report/1038',
+            href: '/report/1038',
             territoryId: 'china',
             date: '2025-09-15',
             filterIds: {
@@ -854,7 +854,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
           },
           {
             label: 'Australia',
-            href: '/browse/report/1039',
+            href: '/report/1039',
             territoryId: 'australia',
             date: '2026-04-11',
             filterIds: {
@@ -871,7 +871,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
           },
           {
             label: 'South Africa',
-            href: '/browse/report/1040',
+            href: '/report/1040',
             territoryId: 'south-africa',
             date: '2025-11-27',
             filterIds: {
@@ -888,7 +888,7 @@ export const BROWSE_COLUMNS: readonly BrowseColumn[] = [
           },
           {
             label: 'United Arab Emirates',
-            href: '/browse/report/1041',
+            href: '/report/1041',
             territoryId: 'uae',
             date: '2026-02-06',
             filterIds: {

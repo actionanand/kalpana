@@ -1,0 +1,49 @@
+<main class="signal-cva-page">
+  <header class="page-header">
+    <p class="page-kicker">Signal forms</p>
+    <h1>Signal based ControlValueAccessor</h1>
+    <p>
+      This demo uses a reusable custom form control whose internal value, touched state, and
+      disabled state are held in Angular signals while still integrating with Reactive Forms.
+    </p>
+  </header>
+
+  <section class="demo-layout" aria-label="Signal ControlValueAccessor demo">
+    <form class="demo-panel" [formGroup]="form">
+      <app-signal-choice-control
+        label="Browse section"
+        [options]="options"
+        formControlName="section"
+      />
+    </form>
+
+    <aside class="state-panel" aria-labelledby="state-title">
+      <h2 id="state-title">Reactive form state</h2>
+      <pre>{{ formSnapshot() | json }}</pre>
+
+      <div class="actions">
+        <button type="button" (click)="chooseClimate()">Set Climate Resilience</button>
+        <button type="button" (click)="toggleDisabled()">
+          {{ disabled() ? 'Enable control' : 'Disable control' }}
+        </button>
+        <button type="button" (click)="resetForm()">Reset</button>
+      </div>
+    </aside>
+  </section>
+
+  <section class="notes" aria-labelledby="notes-title">
+    <h2 id="notes-title">What makes it signal based</h2>
+    <ul>
+      <li>The custom control stores its current value in a signal.</li>
+      <li><code>writeValue</code> updates that signal when the parent form changes.</li>
+      <li>
+        User selections update the signal and call the registered CVA
+        <code>onChange</code> callback.
+      </li>
+      <li>
+        <code>setDisabledState</code> writes to a disabled signal, so the template reacts
+        immediately.
+      </li>
+    </ul>
+  </section>
+</main>

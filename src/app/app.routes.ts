@@ -33,10 +33,18 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'browse/report/:id',
+    path: 'report/:id',
     canActivate: [reportIdGuard, authGuard],
     loadComponent: () =>
       import('./pages/report/report-page.component').then((module) => module.ReportPageComponent),
+  },
+  {
+    path: 'signal-cva',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./pages/signal-cva-demo/signal-cva-demo.component').then(
+        (module) => module.SignalCvaDemoComponent,
+      ),
   },
   {
     path: '404',
