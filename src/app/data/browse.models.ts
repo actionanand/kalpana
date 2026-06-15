@@ -1,4 +1,4 @@
-export type BrowseFilterKey = 'territory' | 'documentType' | 'topic' | 'knowledgeArea';
+export type BrowseFilterKey = 'territory' | 'domain' | 'documentType' | 'topic' | 'knowledgeArea';
 export type MoreFilterKey =
   | 'format'
   | 'audience'

@@ -67,7 +67,7 @@ export class BrowseDataService {
 
   private filterColumn(column: BrowseColumn, query: BrowseQuery): BrowseColumn | null {
     const sections = column.sections
-      .map((section) => this.filterNode(section, query, {}))
+      .map((section) => this.filterNode(section, query, { domain: [column.id] }))
       .filter((section): section is BrowseSection => section !== null);
 
     return sections.length > 0 ? { ...column, sections } : null;

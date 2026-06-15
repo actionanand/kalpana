@@ -933,6 +933,17 @@ export const BROWSE_FILTERS: readonly BrowseFilterDefinition[] = [
     ],
   },
   {
+    key: 'domain',
+    label: 'System category',
+    searchable: true,
+    grouped: false,
+    placement: 'toolbar',
+    options: [
+      { id: 'urban-systems', label: 'Urban Systems', count: 24 },
+      { id: 'climate-resilience', label: 'Climate Resilience', count: 18 },
+    ],
+  },
+  {
     key: 'documentType',
     label: 'Evidence type',
     searchable: true,
@@ -970,7 +981,7 @@ export const BROWSE_FILTERS: readonly BrowseFilterDefinition[] = [
     label: 'Knowledge area',
     searchable: true,
     grouped: false,
-    placement: 'toolbar',
+    placement: 'more',
     options: [
       { id: 'mobility', label: 'Mobility', count: 24 },
       { id: 'public-realm', label: 'Public realm', count: 15 },
