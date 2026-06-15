@@ -17,8 +17,8 @@ import {
   BrowseFilterOption,
   BrowseSelectionKey,
   FilterGroup,
-} from '../data/browse.models';
-import { BrowseFilterService, FilterSortMode } from '../services/browse-filter.service';
+} from '../../../models/browse.models';
+import { BrowseFilterService, FilterSortMode } from '../../../services/browse-filter.service';
 
 export interface FilterApplyEvent {
   readonly key: BrowseSelectionKey;

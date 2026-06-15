@@ -1,0 +1,32 @@
+<fieldset class="rating-control" [disabled]="isDisabled()">
+  <legend>
+    {{ label() }}
+    @if (required()) {
+      <span aria-hidden="true">*</span>
+    }
+  </legend>
+
+  <div class="stars" role="radiogroup" [attr.aria-label]="label()">
+    @for (rating of ratings; track rating.stars) {
+      <button
+        type="button"
+        class="star-button"
+        [class.star-button--selected]="rating.stars <= value()"
+        [attr.aria-label]="rating.text + ', ' + rating.stars + ' of 5'"
+        [attr.aria-checked]="value() === rating.stars"
+        [disabled]="isDisabled()"
+        role="radio"
+        (click)="setRating(rating)"
+        (mouseover)="preview(rating.text)"
+        (focus)="preview(rating.text)"
+        (mouseout)="clearPreview()"
+      >
+        <svg aria-hidden="true" height="29" viewBox="0 0 23 25" width="27">
+          <polygon points="9.9,1.1 3.3,21.78 19.8,8.58 0,8.58 16.5,21.78" />
+        </svg>
+      </button>
+    }
+  </div>
+
+  <p aria-live="polite">{{ displayText() }}</p>
+</fieldset>

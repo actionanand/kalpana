@@ -1,0 +1,96 @@
+<main class="signal-cva-page">
+  <header class="page-header">
+    <p class="page-kicker">Signal forms</p>
+    <h1>Signal based FormValueControl</h1>
+    <p>
+      This demo uses reusable custom form controls with <code>model()</code> values and direct
+      Reactive Forms control binding.
+    </p>
+  </header>
+
+  <button
+    type="button"
+    class="demo-toggle"
+    [attr.aria-pressed]="feedbackDemoVisible()"
+    (click)="toggleFeedbackDemo()"
+  >
+    {{ feedbackDemoVisible() ? 'Show section selector demo' : 'Show rating and reaction demo' }}
+  </button>
+
+  @if (feedbackDemoVisible()) {
+    <section class="demo-layout" aria-label="Signal FormValueControl feedback demo">
+      <form
+        class="demo-panel feedback-form"
+        [formGroup]="feedbackForm"
+        (ngSubmit)="submitFeedback()"
+      >
+        <app-signal-star-rating
+          label="Rate this report"
+          [required]="true"
+          [control]="feedbackForm.controls.rating"
+        />
+
+        <app-signal-reaction-picker
+          label="Send a reaction"
+          [required]="true"
+          [control]="feedbackForm.controls.reaction"
+        />
+
+        <label class="message-field">
+          <span>Feedback note</span>
+          <textarea formControlName="message" rows="4"></textarea>
+        </label>
+
+        <div class="form-actions">
+          <button type="submit" [disabled]="feedbackForm.invalid">Send feedback</button>
+          <button type="button" (click)="resetFeedback()">Reset</button>
+        </div>
+      </form>
+
+      <aside class="state-panel" aria-labelledby="feedback-state-title">
+        <h2 id="feedback-state-title">Feedback form state</h2>
+        <pre>{{ feedbackSnapshot() | json }}</pre>
+
+        @if (submittedFeedback(); as feedback) {
+          <div class="submission" role="status">
+            <strong>Feedback sent</strong>
+            <span>Rating {{ feedback.rating }}/5, {{ feedback.reaction }}</span>
+          </div>
+        }
+      </aside>
+    </section>
+  } @else {
+    <section class="demo-layout" aria-label="Signal FormValueControl section selector demo">
+      <form class="demo-panel" [formGroup]="form">
+        <app-signal-choice-control
+          label="Browse section"
+          [options]="options"
+          [control]="form.controls.section"
+        />
+      </form>
+
+      <aside class="state-panel" aria-labelledby="state-title">
+        <h2 id="state-title">Section form state</h2>
+        <pre>{{ formSnapshot() | json }}</pre>
+
+        <div class="actions">
+          <button type="button" (click)="chooseClimate()">Set Climate Resilience</button>
+          <button type="button" (click)="toggleDisabled()">
+            {{ disabled() ? 'Enable control' : 'Disable control' }}
+          </button>
+          <button type="button" (click)="resetForm()">Reset</button>
+        </div>
+      </aside>
+    </section>
+  }
+
+  <section class="notes" aria-labelledby="notes-title">
+    <h2 id="notes-title">What makes it FormValueControl based</h2>
+    <ul>
+      <li>The custom controls expose <code>value = model&lt;T&gt;(...)</code>.</li>
+      <li>The parent form binds each control through the <code>[control]</code> input.</li>
+      <li>Disabled state is read with <code>disabled = input(false)</code>.</li>
+      <li>User selections only update the model value; the form sync is handled by Angular.</li>
+    </ul>
+  </section>
+</main>

@@ -20,7 +20,7 @@ import {
   BrowseSection,
   BrowseSelectionKey,
   SelectedFilterMap,
-} from '../data/browse.models';
+} from '../models/browse.models';
 
 @Service()
 export class BrowseDataService {

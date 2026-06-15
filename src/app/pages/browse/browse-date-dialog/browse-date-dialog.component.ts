@@ -4,7 +4,7 @@ import {
   BrowseDateKey,
   BrowseDateSelection,
   DateOperator,
-} from '../data/browse.models';
+} from '../../../models/browse.models';
 
 interface DateDraft {
   readonly key: BrowseDateKey;

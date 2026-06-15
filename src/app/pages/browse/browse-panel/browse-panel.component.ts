@@ -1,7 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Component, computed, input, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { BrowseColumn, BrowseNode, BrowseSection } from '../data/browse.models';
+import { BrowseColumn, BrowseNode, BrowseSection } from '../../../models/browse.models';
 
 type ExpandedState = Record<string, boolean>;
 

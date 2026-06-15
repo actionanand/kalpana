@@ -1,0 +1,31 @@
+<fieldset class="reaction-control" [disabled]="isDisabled()">
+  <legend>
+    {{ label() }}
+    @if (required()) {
+      <span aria-hidden="true">*</span>
+    }
+  </legend>
+
+  <div class="reaction-list">
+    @for (reaction of reactions; track reaction.value) {
+      <button
+        type="button"
+        class="reaction-button"
+        [class.reaction-button--selected]="value() === reaction.value"
+        [attr.aria-pressed]="value() === reaction.value"
+        [disabled]="isDisabled()"
+        (click)="select(reaction)"
+      >
+        <svg aria-hidden="true" height="22" viewBox="0 0 24 24" width="22">
+          <path [attr.d]="reaction.path" />
+        </svg>
+        <span>
+          <strong>{{ reaction.label }}</strong>
+          <small>{{ reaction.description }}</small>
+        </span>
+      </button>
+    }
+  </div>
+
+  <p aria-live="polite">Selected: {{ selectedReaction() }}</p>
+</fieldset>

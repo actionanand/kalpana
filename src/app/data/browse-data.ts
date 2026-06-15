@@ -1,4 +1,9 @@
-import { BrowseColumn, BrowseDateEntry, BrowseFilterDefinition, BrowseMode } from './browse.models';
+import {
+  BrowseColumn,
+  BrowseDateEntry,
+  BrowseFilterDefinition,
+  BrowseMode,
+} from '../models/browse.models';
 
 export const BROWSE_MODES: readonly BrowseMode[] = [
   {

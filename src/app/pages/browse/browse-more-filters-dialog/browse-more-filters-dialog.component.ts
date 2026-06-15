@@ -1,6 +1,6 @@
 import { Component, computed, inject, input, linkedSignal, signal, output } from '@angular/core';
-import { BrowseFilter, BrowseSelectionKey, SelectedFilterMap } from '../data/browse.models';
-import { BrowseFilterService, FilterSortMode } from '../services/browse-filter.service';
+import { BrowseFilter, BrowseSelectionKey, SelectedFilterMap } from '../../../models/browse.models';
+import { BrowseFilterService, FilterSortMode } from '../../../services/browse-filter.service';
 
 @Component({
   selector: 'app-browse-more-filters-dialog',
