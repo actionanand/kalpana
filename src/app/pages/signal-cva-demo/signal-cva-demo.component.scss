@@ -44,6 +44,29 @@ h1 {
   line-height: 1.55;
 }
 
+.demo-toggle {
+  min-height: 42px;
+  margin-bottom: 22px;
+  border: 1px solid #17172f;
+  border-radius: 4px;
+  padding: 9px 16px;
+  background: #17172f;
+  color: #fff;
+  font: inherit;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.demo-toggle:hover,
+.demo-toggle:focus-visible {
+  background: #2a2a48;
+}
+
+.demo-toggle:focus-visible {
+  outline: 2px solid #4b5560;
+  outline-offset: 3px;
+}
+
 .demo-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 360px;
@@ -61,6 +84,11 @@ h1 {
 
 .demo-panel {
   padding: 28px;
+}
+
+.feedback-form {
+  display: grid;
+  gap: 28px;
 }
 
 .state-panel {
@@ -91,6 +119,12 @@ pre {
   gap: 10px;
 }
 
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 button {
   min-height: 42px;
   border: 1px solid #cbd3da;
@@ -112,6 +146,50 @@ button:focus-visible {
 button:focus-visible {
   outline: 2px solid #4b5560;
   outline-offset: 3px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
+.message-field {
+  display: grid;
+  gap: 8px;
+  color: #202933;
+  font-size: 15px;
+  font-weight: 750;
+}
+
+textarea {
+  min-height: 112px;
+  resize: vertical;
+  border: 1px solid #cbd3da;
+  border-radius: 4px;
+  padding: 12px;
+  color: #202933;
+  font: inherit;
+  font-weight: 400;
+}
+
+textarea:focus-visible {
+  border-color: #4b5560;
+  outline: 2px solid #4b5560;
+  outline-offset: 3px;
+}
+
+.submission {
+  display: grid;
+  gap: 3px;
+  border-left: 3px solid #126a43;
+  padding: 10px 12px;
+  background: #eff8f3;
+  color: #173c2b;
+  font-size: 14px;
+}
+
+.submission strong {
+  font-size: 15px;
 }
 
 .notes {

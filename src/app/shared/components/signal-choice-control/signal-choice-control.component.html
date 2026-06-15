@@ -1,4 +1,4 @@
-<fieldset class="choice-control" [disabled]="disabled()">
+<fieldset class="choice-control" [disabled]="isDisabled()">
   <legend>{{ label() }}</legend>
 
   <div class="choice-list">
@@ -8,9 +8,8 @@
         class="choice-option"
         [class.choice-option--selected]="value() === option.value"
         [attr.aria-pressed]="value() === option.value"
-        [disabled]="disabled()"
+        [disabled]="isDisabled()"
         (click)="choose(option)"
-        (blur)="markTouched()"
       >
         <span class="choice-label">{{ option.label }}</span>
         <span class="choice-description">{{ option.description }}</span>
