@@ -18,23 +18,31 @@ const publicPageGuard: CanActivateFn = () => {
 export const routes: Routes = [
   {
     path: '',
+    canActivate: [publicPageGuard],
+    loadComponent: () =>
+      import('./pages/landing-page/landing-page.component').then(
+        (module) => module.LandingPageComponent,
+      ),
+  },
+  {
+    path: 'browse',
     canActivate: [authGuard],
     loadComponent: () =>
-      import('./two-column-browse/two-column-browse.component').then(
+      import('./pages/browse/two-column-browse/two-column-browse.component').then(
         (module) => module.TwoColumnBrowseComponent,
       ),
   },
   {
-    path: 'report/:id',
+    path: 'browse/report/:id',
     canActivate: [reportIdGuard, authGuard],
     loadComponent: () =>
-      import('./report-page/report-page.component').then((module) => module.ReportPageComponent),
+      import('./pages/report/report-page.component').then((module) => module.ReportPageComponent),
   },
   {
     path: '404',
     canActivate: [publicPageGuard],
     loadComponent: () =>
-      import('./not-found-page/not-found-page.component').then(
+      import('./pages/not-found-page/not-found-page.component').then(
         (module) => module.NotFoundPageComponent,
       ),
   },

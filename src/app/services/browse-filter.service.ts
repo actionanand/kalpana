@@ -1,5 +1,5 @@
 import { Service } from '@angular/core';
-import { BrowseFilter, BrowseFilterOption, FilterGroup } from '../data/browse.models';
+import { BrowseFilter, BrowseFilterOption, FilterGroup } from '../models/browse.models';
 
 export type FilterSortMode = 'region' | 'alpha' | 'frequency';
 

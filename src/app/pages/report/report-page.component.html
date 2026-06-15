@@ -4,7 +4,7 @@
       <app-loading-indicator [label]="'Resolving report ' + reportId() + '...'" />
     </section>
   } @else if (reportResource.value(); as report) {
-    <a class="back-link" routerLink="/">Back to browse</a>
+    <a class="back-link" routerLink="/browse">Back to browse</a>
 
     <article class="report-card">
       <p class="report-kicker">Report {{ report.id }}</p>
@@ -40,7 +40,7 @@
       <p class="report-kicker">Report {{ reportId() }}</p>
       <h1>You don't have access to that Report</h1>
       <p>Please contact your workspace administrator or support team to request access.</p>
-      <a class="back-link" routerLink="/">Back to browse</a>
+      <a class="back-link" routerLink="/browse">Back to browse</a>
     </section>
   }
 </main>

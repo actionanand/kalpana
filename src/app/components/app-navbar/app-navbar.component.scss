@@ -1,0 +1,61 @@
+:host {
+  display: block;
+}
+
+.app-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 64px;
+  padding: 0 56px;
+  border-bottom: 1px solid #dfe3e6;
+  background: #fff;
+  color: #1f2933;
+}
+
+.app-brand {
+  color: #111820;
+  font-size: 20px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 7px 14px;
+  border-radius: 4px;
+  color: #202933;
+  font-size: 15px;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+nav a:hover,
+nav a:focus-visible,
+.app-nav-link--active {
+  background: #edf1f4;
+}
+
+.app-brand:focus-visible,
+nav a:focus-visible {
+  outline: 2px solid #4b5560;
+  outline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+  .app-navbar {
+    padding: 0 16px;
+  }
+}

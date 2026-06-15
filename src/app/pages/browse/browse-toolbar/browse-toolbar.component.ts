@@ -1,5 +1,5 @@
 import { Component, input, output } from '@angular/core';
-import { BrowseFilter, BrowseSelectionKey } from '../data/browse.models';
+import { BrowseFilter, BrowseSelectionKey } from '../../../models/browse.models';
 
 export interface FilterSummary {
   readonly key: BrowseSelectionKey | 'date' | 'more';

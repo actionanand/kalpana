@@ -1,7 +1,7 @@
 import { Component, computed, inject, resource } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { LoadingIndicatorComponent } from '../loading-indicator/loading-indicator.component';
-import { ReportDataService } from '../services/report-data.service';
+import { ReportDataService } from '../../services/report-data.service';
+import { LoadingIndicatorComponent } from '../../shared/components/loading-indicator/loading-indicator.component';
 
 @Component({
   selector: 'app-report-page',

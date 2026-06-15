@@ -1,6 +1,6 @@
 import { Component, effect, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ClientAuthService } from '../services/client-auth.service';
+import { ClientAuthService } from '../../services/client-auth.service';
 
 interface AuthForm {
   readonly username: FormControl<string>;

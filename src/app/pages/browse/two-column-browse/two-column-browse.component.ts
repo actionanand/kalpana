@@ -7,7 +7,7 @@ import {
 import { BrowseMoreFiltersDialogComponent } from '../browse-more-filters-dialog/browse-more-filters-dialog.component';
 import { BrowsePanelComponent } from '../browse-panel/browse-panel.component';
 import { BrowseToolbarComponent, FilterSummary } from '../browse-toolbar/browse-toolbar.component';
-import { EMPTY_BROWSE_RESPONSE } from '../data/browse-data';
+import { EMPTY_BROWSE_RESPONSE } from '../../../data/browse-data';
 import {
   BrowseDateEntry,
   BrowseDateSelection,
@@ -15,8 +15,8 @@ import {
   BrowseMode,
   BrowseSelectionKey,
   SelectedFilterMap,
-} from '../data/browse.models';
-import { BrowseDataService } from '../services/browse-data.service';
+} from '../../../models/browse.models';
+import { BrowseDataService } from '../../../services/browse-data.service';
 
 const EMPTY_SELECTED_IDS: readonly string[] = [];
 
